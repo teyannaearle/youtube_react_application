@@ -7,8 +7,8 @@ import About from "../Assets/info-2-50.png"
 function Navbar() {
     return (
        <nav>
-           <Link to="/"><img src={Logo}/></Link>
-           <Link to="/about"><img src={About}/></Link>
+           <Link to="/"><img src={Logo} alt="home"/></Link>
+           <Link to="/about"><img src={About} alt="about"/></Link>
        </nav>
     )
 }

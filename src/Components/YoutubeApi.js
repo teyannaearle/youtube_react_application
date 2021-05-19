@@ -11,8 +11,8 @@ import axios from "axios"
 const apiKey = process.env.REACT_APP_API_KEY;
 
 const getRandom = async () => {
-const { data } = await axios.get(`https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&key=${apiKey}&part=snippet&maxResults=10`)
-//console.log(data.items)
+const { data } = await axios.get(`https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&key=${apiKey}&part=snippet&maxResults=12`)
+// console.log(data.items)
 return data.items
 }
 

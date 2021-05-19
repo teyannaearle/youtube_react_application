@@ -1,6 +1,7 @@
 import React from "react";
 import "./About.css";
-import Angelina from "../Assets/Angelina.jpeg"
+import Angelina from "../Assets/Angelina.jpeg";
+import Teyanna from "../Assets/Teyanna.jpg";
 
 function About() {
   return (
@@ -17,7 +18,7 @@ function About() {
         </p>
       </div>
       <div className="about Angelina">
-        <img src={Angelina}/>
+        <img src={Angelina} />
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -38,6 +39,7 @@ function About() {
           pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
           culpa qui officia deserunt mollit anim id est laborum.
         </p>
+        <img src={Teyanna} />
       </div>
     </div>
   );

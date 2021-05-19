@@ -1,28 +1,28 @@
-.about-page{
-    width: 80%;
-    margin: auto;
+.about-page {
+  width: 80%;
+  margin: auto;
 }
 
-.about{
-    background-color: rgb(240, 240, 240);;
-    margin: 30px;
-    padding: 20px;
-    border-radius: 8px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
+.about {
+  background-color: rgb(240, 240, 240);
+  margin: 30px;
+  padding: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
 
-.about img{
-    width: 200px;
+.about img {
+  width: 200px;
 }
 
-.Angelina img{
-    float: left;
-    padding-right: 20px;
+.Angelina img {
+  float: left;
+  padding-right: 20px;
 }
 
-.Teyanna img{
-    float: right;
-    padding-left: 20px;
+.Teyanna img {
+  float: right;
+  padding-left: 20px;
 }

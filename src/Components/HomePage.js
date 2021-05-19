@@ -1,5 +1,6 @@
 import React from "react";
 import "./HomePage.css";
+import Searchbar from "./Searchbar"
 
 function Homepage({ randomVideos }) {
   const videos = randomVideos.map((video) => {
@@ -19,11 +20,14 @@ function Homepage({ randomVideos }) {
   });
 
   return (
-    <div className="home">
-      <h1>Recommended</h1>
-      <hr />
-      <div className="displayed-vids">{videos}</div>
-    </div>
+    <>
+      <Searchbar />
+      <div className="home">
+        <h1>Recommended</h1>
+        <hr />
+        <div className="displayed-vids">{videos}</div>
+      </div>
+    </> 
   );
 }
 

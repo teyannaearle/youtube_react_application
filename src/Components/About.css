@@ -26,3 +26,19 @@
   float: right;
   padding-left: 20px;
 }
+.about p {
+  text-align: justify;
+}
+@media screen and (max-width: 600px) {
+  .about {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .Teyanna img {
+    order: -1;
+  }
+  .about img {
+    padding-bottom: 5px;
+  }
+}

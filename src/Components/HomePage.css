@@ -28,7 +28,7 @@ li {
 }
 
 li img {
-  width: 250px;
+  width: 90%;
 }
 
 .title {
@@ -41,4 +41,22 @@ li img {
 
 p {
   margin: 2px;
+}
+
+@media screen and (max-width: 900px) {
+  .displayed-vids {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .displayed-vids {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .displayed-vids {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

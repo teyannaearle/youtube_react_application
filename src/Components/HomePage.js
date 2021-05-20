@@ -1,11 +1,16 @@
 import React from "react";
+import { useLocation } from "react-router-dom"
 import "./HomePage.css";
+import GrabLocation from "./GrabLocation"
 
-function Homepage({ randomVideos }) {
-  const videos = randomVideos.map((video) => {
+function Homepage({ randomVideos, searchedVideos, getLocation}) {
+  const point = useLocation()
+  GrabLocation(getLocation, point)
+
+  const listItems = (video, id) => {
     return (
-      <li key={video.id}>
-        <a href={`https://www.youtube.com/watch?v=${video.id}`}>
+      <li key={id}>
+        <a href={`https://www.youtube.com/watch?v=${id}`}>
           <img
             src={video.snippet.thumbnails.medium.url}
             alt={video.snippet.title}
@@ -16,14 +21,27 @@ function Homepage({ randomVideos }) {
         <p className="channel">{video.snippet.channelTitle}</p>
       </li>
     );
+  };
+
+  const randVids = randomVideos.map((video) => {
+    let id  = video.id
+    return listItems(video, id);
   });
 
-  return (
+  const searchedResults = searchedVideos.map((video) => {
+    let id = video.id.videoId
+    return listItems(video, id);
+  });
+
+  return searchedVideos.length !== 0 ? (
+    <div className="home">
+      <ul className="displayed-vids">{searchedResults}</ul>
+    </div>
+  ) : (
     <div className="home">
       <h1>Recommended</h1>
       <hr />
-      <div className="displayed-vids">{videos}</div>
-      
+      <ul className="displayed-vids">{randVids}</ul>
     </div>
   );
 }

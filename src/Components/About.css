@@ -26,3 +26,23 @@
   float: right;
   padding-left: 20px;
 }
+.about p {
+  text-align: justify;
+}
+@media screen and (max-width: 600px) {
+  .about {
+    display: flex;
+    flex-direction: column;
+  }
+  .Angelina img {
+    padding-right: 0px;
+  }
+
+  .Teyanna img {
+    order: -1;
+    padding-left: 0px;
+  }
+  .about img {
+    padding-bottom: 5px;
+  }
+}

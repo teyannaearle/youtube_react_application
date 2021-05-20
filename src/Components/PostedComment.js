@@ -44,7 +44,7 @@ export default function PostedComment({ index, key, comment, deleteComment }) {
 
       <div className="comment-text">
         <p>{comment.commentBody}</p>
-        <p>key {index}</p>
+       
       </div>
       <button onClick={() => deleteComment(index)}> Delete Comment</button>
     </div>

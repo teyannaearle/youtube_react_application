@@ -10,7 +10,7 @@ function Homepage({ randomVideos, searchedVideos, getLocation, input}) {
   const listItems = (video, id) => {
     return (
       <li key={id}>
-        <a href={`https://www.youtube.com/watch?v=${id}`}>
+        <a href={`https://localhost:3000/video/${id}`}>
           <img
             src={video.snippet.thumbnails.medium.url}
             alt={video.snippet.title}

@@ -108,7 +108,7 @@ export class App extends Component {
             render={(props) => (
               <Videos
                 {...props}
-                videoId={videoId}
+                videoId={this.state.videoId}
               />
             )}
           ></Route>

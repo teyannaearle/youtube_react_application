@@ -24,20 +24,18 @@ const getTime = () => {
   return dateAll;
 };
 
-export default function PostedComment({ comment }) {
+export default function PostedComment({ index, key, comment, deleteComment }) {
   console.log(comment);
 
   return (
     <div className="comment-user">
       <div className="comment-user-avatar">
-       
-          <img
-            src={person}
-            className="comment-avatar"
-            alt="user avatar"
-            // style={{ height: "50px", width: "50px" }}
-          />
-       
+        <img
+          src={person}
+          className="comment-avatar"
+          alt="user avatar"
+          // style={{ height: "50px", width: "50px" }}
+        />
       </div>
 
       <span className="comment-username">{comment.commentName}</span>
@@ -46,7 +44,9 @@ export default function PostedComment({ comment }) {
 
       <div className="comment-text">
         <p>{comment.commentBody}</p>
+        <p>key {index}</p>
       </div>
+      <button onClick={() => deleteComment(index)}> Delete Comment</button>
     </div>
   );
 }

@@ -6,6 +6,7 @@ import HomePage from "./Components/HomePage";
 import About from "./Components/About";
 import YoutubeApi from "./Components/YoutubeApi";
 import Searchbar from "./Components/Searchbar";
+import Videos from "./Components/Videos"
 
 export class App extends Component {
   constructor() {
@@ -16,6 +17,7 @@ export class App extends Component {
       redirect: false,
       randomVideos: [],
       searchedVideos: [],
+      videoId: "HRXVQ77ehRQ"
     };
   }
 
@@ -63,7 +65,7 @@ export class App extends Component {
   };
 
   render() {
-    const { randomVideos, input, searchedVideos, location, redirect } = this.state;
+    const { randomVideos, input, searchedVideos, location, redirect, videoId } = this.state;
     return (
       <div>
         <Navbar clearSearch={this.clearSearch} />
@@ -95,6 +97,16 @@ export class App extends Component {
                 {...props}
                 location={location}
                 getLocation={this.getLocation}
+              />
+            )}
+          ></Route>
+
+<Route
+            path="/video/:id"
+            render={(props) => (
+              <Videos
+                {...props}
+                videoId={videoId}
               />
             )}
           ></Route>

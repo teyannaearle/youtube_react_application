@@ -2,18 +2,16 @@ import React from "react";
 import "./About.css";
 import Angelina from "../Assets/Angelina.jpeg";
 import Teyanna from "../Assets/Teyanna.jpg";
-import { useLocation } from "react-router-dom"
-import GrabLocation from "./GrabLocation"
-
+import { useLocation } from "react-router-dom";
+import GrabLocation from "./GrabLocation";
 
 function About(props) {
-  const point = useLocation()
-  const {getLocation} = props
+  const point = useLocation();
+  const { getLocation } = props;
 
-  GrabLocation(getLocation, point)
+  GrabLocation(getLocation, point);
 
   return (
-    
     <div className="about-page">
       <div className="about Project">
         <p>
@@ -27,7 +25,7 @@ function About(props) {
         </p>
       </div>
       <div className="about Angelina">
-        <img src={Angelina} alt="Angelina"/>
+        <img src={Angelina} alt="Angelina" />
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -53,7 +51,5 @@ function About(props) {
     </div>
   );
 }
-  
-
 
 export default About;

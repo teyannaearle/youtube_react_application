@@ -23,8 +23,8 @@ const getSearch = async (input) => {
 };
 
 const defaults = {
-    getRandom,
-    getSearch
-}
+  getRandom,
+  getSearch,
+};
 
-export default defaults
+export default defaults;

@@ -12,7 +12,6 @@ function Navbar(props) {
       </Link>
       <Link to="/about">
         <img src={About} alt="about"  onClick={props.clearSearch} />
-       
       </Link>
     </nav>
   );

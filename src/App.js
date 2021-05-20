@@ -13,6 +13,7 @@ export class App extends Component {
     super();
     this.state = {
       input: "",
+      prevInput: "",
       location: "",
       redirect: false,
       randomVideos: [],
@@ -46,6 +47,7 @@ export class App extends Component {
     }
     const searchResults = await YoutubeApi.getSearch(input);
     this.setState({
+      prevInput: input,
       searchedVideos: searchResults,
       input: "",
       redirect: false,
@@ -65,7 +67,7 @@ export class App extends Component {
   };
 
   render() {
-    const { randomVideos, input, searchedVideos, location, redirect, videoId } = this.state;
+    const { randomVideos, input, prevInput, searchedVideos, location, redirect } = this.state;
     return (
       <div>
         <Navbar clearSearch={this.clearSearch} />
@@ -82,7 +84,7 @@ export class App extends Component {
             render={(props) => (
               <HomePage
                 {...props}
-                input={input}
+                input={prevInput}
                 randomVideos={randomVideos}
                 searchedVideos={searchedVideos}
                 getLocation={this.getLocation}

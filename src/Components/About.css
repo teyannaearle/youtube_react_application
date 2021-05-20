@@ -46,3 +46,15 @@
     padding-bottom: 5px;
   }
 }
+
+
+svg {
+  position: center;
+  width: 30px;
+  color: #4d648d;
+}
+svg:hover {
+  transform: scale(1.2);
+  color: #283655;
+
+}

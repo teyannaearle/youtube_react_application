@@ -39,12 +39,12 @@ export default function PostedComment({ index, key, comment, deleteComment }) {
         />
       </div>
 
-      {/* <br /> */}
+   
 
       <div className="comment-text">
         <span className="comment-username">{comment.commentName}</span>
         <p>{comment.commentBody}</p>
-        {/* <p>key {index}</p> */}
+      {/* <p>key {index}</p> */}
       </div>
       <time className="block-comment-time">{getTime()}</time>
       <br />

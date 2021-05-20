@@ -57,7 +57,7 @@ export default class Videos extends Component {
 
   render() {
     const { author, text, comments } = this.state;
-    const { videoId } = this.props;
+    const { videoId, videoTitle } = this.props;
     const postedComments = Object.keys(comments).map(this.renderComment);
 
     const opts = {
@@ -69,12 +69,13 @@ export default class Videos extends Component {
     };
     return (
       <div className="video-page">
+        <h1 className="h1">{videoTitle}</h1>
         <div>
           <YouTube videoId={videoId} opts={opts} onReady={this._onReady} />
         </div>
 
         <div className="comments">
-          <h4>Leave a Comment</h4>
+          <h3>Leave a Comment</h3>
           <form action="" onSubmit={this.handleSubmit} className="comment-form">
             <label htmlFor="username">Name: </label>
             <input
@@ -97,8 +98,9 @@ export default class Videos extends Component {
             />
             <input type="submit" value="Submit" />
           </form>
+
+          <div className="comment-list">{postedComments}</div>
         </div>
-        <div className="comment-list">{postedComments}</div>
       </div>
     );
   }

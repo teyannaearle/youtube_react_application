@@ -20,7 +20,7 @@ function Homepage({
           <img
             src={video.snippet.thumbnails.medium.url}
             alt={video.snippet.title}
-            onClick={() => grabVideo(id)}
+            onClick={() => grabVideo(id,video.snippet.title)}
           />
           <br />
           <p className="title">{video.snippet.title}</p>

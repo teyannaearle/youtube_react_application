@@ -1,5 +1,6 @@
 import React from "react";
 import person from "../Assets/person-icon-1682.png";
+import "./PostedComment.css";
 
 const getTime = () => {
   const month = [
@@ -38,15 +39,19 @@ export default function PostedComment({ index, key, comment, deleteComment }) {
         />
       </div>
 
-      <span className="comment-username">{comment.commentName}</span>
-      <br />
-      <time className="block-comment-time">{getTime()}</time>
+      {/* <br /> */}
 
       <div className="comment-text">
+        <span className="comment-username">{comment.commentName}</span>
         <p>{comment.commentBody}</p>
-        <p>key {index}</p>
+        {/* <p>key {index}</p> */}
       </div>
-      <button onClick={() => deleteComment(index)}> Delete Comment</button>
+      <time className="block-comment-time">{getTime()}</time>
+      <br />
+      <span className="delete-button">
+        {" "}
+        <button onClick={() => deleteComment(index)}> Delete Comment</button>
+      </span>
     </div>
   );
 }

@@ -14,6 +14,7 @@ export class App extends Component {
     this.state = {
       input: "",
       videoId: "",
+      videoTitle: "",
       location: "",
       prevInput: "",
       redirect: false,
@@ -66,9 +67,10 @@ export class App extends Component {
     });
   };
 
-  grabVideo = (id) => {
+  grabVideo = (id,title) => {
     this.setState({
       videoId: id,
+      videoTitle: title
     });
   };
 
@@ -81,6 +83,7 @@ export class App extends Component {
       location,
       redirect,
       videoId,
+      videoTitle
     } = this.state;
     return (
       <div>
@@ -120,7 +123,7 @@ export class App extends Component {
 
           <Route
             path="/video/:id"
-            render={(props) => <Videos {...props} videoId={videoId} />}
+            render={(props) => <Videos {...props} videoId={videoId} videoTitle={videoTitle}/>}
           ></Route>
         </Switch>
       </div>

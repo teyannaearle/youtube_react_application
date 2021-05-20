@@ -11,7 +11,8 @@ function Navbar(props) {
         <img src={Logo} alt="home" />
       </Link>
       <Link to="/about">
-        <img src={About} alt="about" onClick={props.clearSearch} />
+        <img src={About} alt="about"  onClick={props.clearSearch} />
+       
       </Link>
     </nav>
   );

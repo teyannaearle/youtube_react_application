@@ -2,9 +2,18 @@ import React from "react";
 import "./About.css";
 import Angelina from "../Assets/Angelina.jpeg";
 import Teyanna from "../Assets/Teyanna.jpg";
+import { useLocation } from "react-router-dom"
+import GrabLocation from "./GrabLocation"
 
-function About() {
+
+function About(props) {
+  const point = useLocation()
+  const {getLocation} = props
+
+  GrabLocation(getLocation, point)
+
   return (
+    
     <div className="about-page">
       <div className="about Project">
         <p>
@@ -44,5 +53,7 @@ function About() {
     </div>
   );
 }
+  
+
 
 export default About;

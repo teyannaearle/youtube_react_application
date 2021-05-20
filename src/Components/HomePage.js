@@ -1,9 +1,13 @@
 import React from "react";
+import { useLocation } from "react-router-dom"
 import "./HomePage.css";
+import GrabLocation from "./GrabLocation"
 
-function Homepage({ randomVideos, searchedVideos }) {
+function Homepage({ randomVideos, searchedVideos, getLocation}) {
+  const point = useLocation()
+  GrabLocation(getLocation, point)
+
   const listItems = (video, id) => {
-    
     return (
       <li key={id}>
         <a href={`https://www.youtube.com/watch?v=${id}`}>

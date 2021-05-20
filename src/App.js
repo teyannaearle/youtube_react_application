@@ -20,6 +20,7 @@ export class App extends Component {
       redirect: false,
       randomVideos: [],
       searchedVideos: [],
+      invalid: false,
     };
   }
 
@@ -41,23 +42,37 @@ export class App extends Component {
     e.preventDefault();
     const { input, location } = this.state;
 
-    if (location === "/about") {
+    if ( (location === "/about" && !input) || (location === "/video/:id" && !input) ) {
+      this.setState({
+        invalid: true,
+      });
+    } else if (location === "/about") {
       this.setState({
         redirect: true,
       });
     }
-    const searchResults = await YoutubeApi.getSearch(input);
-    this.setState({
-      prevInput: input,
-      searchedVideos: searchResults,
-      input: "",
-      redirect: false,
-    });
+
+    if (input) {
+      const searchResults = await YoutubeApi.getSearch(input);
+      this.setState({
+        prevInput: input,
+        searchedVideos: searchResults,
+        input: "",
+        redirect: false,
+        invalid: false,
+      });
+    } else {
+      this.setState({
+        invalid: true,
+      });
+    }
   };
 
   clearSearch = () => {
     this.setState({
       searchedVideos: [],
+      input: "",
+      invalid: false,
     });
   };
 
@@ -67,10 +82,11 @@ export class App extends Component {
     });
   };
 
-  grabVideo = (id,title) => {
+  grabVideo = (id, title) => {
     this.setState({
       videoId: id,
-      videoTitle: title
+      videoTitle: title,
+      invalid: false
     });
   };
 
@@ -83,7 +99,8 @@ export class App extends Component {
       location,
       redirect,
       videoId,
-      videoTitle
+      videoTitle,
+      invalid,
     } = this.state;
     return (
       <div>
@@ -106,6 +123,7 @@ export class App extends Component {
                 searchedVideos={searchedVideos}
                 getLocation={this.getLocation}
                 grabVideo={this.grabVideo}
+                invalid={invalid}
               />
             )}
             // component={HomePage} randomVideos={randomVideos}
@@ -117,13 +135,21 @@ export class App extends Component {
                 {...props}
                 location={location}
                 getLocation={this.getLocation}
+                invalid={invalid}
               />
             )}
           ></Route>
 
           <Route
             path="/video/:id"
-            render={(props) => <Videos {...props} videoId={videoId} videoTitle={videoTitle}/>}
+            render={(props) => (
+              <Videos
+                {...props}
+                videoId={videoId}
+                videoTitle={videoTitle}
+                invalid={invalid}
+              />
+            )}
           ></Route>
         </Switch>
       </div>

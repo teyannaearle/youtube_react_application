@@ -7,12 +7,13 @@ import GrabLocation from "./GrabLocation";
 
 function About(props) {
   const point = useLocation();
-  const { getLocation } = props;
+  const { getLocation, invalid } = props;
 
   GrabLocation(getLocation, point);
 
   return (
     <div className="about-page">
+      {invalid ? <h3 className="error">Invalid search. Please try again.</h3> : null }
       <div className="about Project">
         <h3>React App with Youtube API</h3>
         <p>

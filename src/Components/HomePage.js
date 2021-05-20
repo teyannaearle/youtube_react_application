@@ -9,6 +9,7 @@ function Homepage({
   getLocation,
   input,
   grabVideo,
+  invalid,
 }) {
   const point = useLocation();
   GrabLocation(getLocation, point);
@@ -20,7 +21,7 @@ function Homepage({
           <img
             src={video.snippet.thumbnails.medium.url}
             alt={video.snippet.title}
-            onClick={() => grabVideo(id,video.snippet.title)}
+            onClick={() => grabVideo(id, video.snippet.title)}
           />
           <br />
           <p className="title">{video.snippet.title}</p>
@@ -41,17 +42,23 @@ function Homepage({
   });
 
   return searchedVideos.length !== 0 ? (
-    <div className="home">
-      <h2>Search results for: {input}</h2>
-      <hr />
-      <ul className="displayed-vids">{searchedResults}</ul>
-    </div>
+    <>
+      {invalid ? (<h3 className="error">Invalid search. Please try again.</h3>) : null}
+      <div className="home">
+        <h2>Search results for: {input}</h2>
+        <hr />
+        <ul className="displayed-vids">{searchedResults}</ul>
+      </div>
+    </>
   ) : (
-    <div className="home">
-      <h1>Recommended</h1>
-      <hr />
-      <ul className="displayed-vids">{randVids}</ul>
-    </div>
+    <>
+      {invalid ? (<h3 className="error">Invalid search. Please try again.</h3>) : null}
+      <div className="home">
+        <h1>Recommended</h1>
+        <hr />
+        <ul className="displayed-vids">{randVids}</ul>
+      </div>
+    </>
   );
 }
 

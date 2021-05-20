@@ -111,7 +111,7 @@ export default class Videos extends Component {
       },
     };
     return (
-      <div>
+      <div className="video-page">
         <div>
           <YouTube videoId={videoId} opts={opts} onReady={this._onReady} />
         </div>

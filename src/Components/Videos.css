@@ -1,12 +1,22 @@
-.comments {
+.video-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.comments {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   font-family: "Roboto", sans-serif;
   margin-top: 20px;
   background: rgb(252, 249, 249);
   color: rgb(5, 5, 5);
 }
 .comments h4 {
-text-align: center;
+  text-align: center;
 }
 
 .comment-list {

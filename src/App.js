@@ -6,19 +6,19 @@ import HomePage from "./Components/HomePage";
 import About from "./Components/About";
 import YoutubeApi from "./Components/YoutubeApi";
 import Searchbar from "./Components/Searchbar";
-import Videos from "./Components/Videos"
+import Videos from "./Components/Videos";
 
 export class App extends Component {
   constructor() {
     super();
     this.state = {
       input: "",
-      prevInput: "",
+      videoId: "",
       location: "",
+      prevInput: "",
       redirect: false,
       randomVideos: [],
       searchedVideos: [],
-      videoId: "HRXVQ77ehRQ"
     };
   }
 
@@ -66,8 +66,22 @@ export class App extends Component {
     });
   };
 
+  grabVideo = (id) => {
+    this.setState({
+      videoId: id,
+    });
+  };
+
   render() {
-    const { randomVideos, input, prevInput, searchedVideos, location, redirect } = this.state;
+    const {
+      randomVideos,
+      input,
+      prevInput,
+      searchedVideos,
+      location,
+      redirect,
+      videoId,
+    } = this.state;
     return (
       <div>
         <Navbar clearSearch={this.clearSearch} />
@@ -88,6 +102,7 @@ export class App extends Component {
                 randomVideos={randomVideos}
                 searchedVideos={searchedVideos}
                 getLocation={this.getLocation}
+                grabVideo={this.grabVideo}
               />
             )}
             // component={HomePage} randomVideos={randomVideos}
@@ -103,14 +118,9 @@ export class App extends Component {
             )}
           ></Route>
 
-<Route
+          <Route
             path="/video/:id"
-            render={(props) => (
-              <Videos
-                {...props}
-                videoId={this.state.videoId}
-              />
-            )}
+            render={(props) => <Videos {...props} videoId={videoId} />}
           ></Route>
         </Switch>
       </div>

@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom"
 import "./HomePage.css";
 import GrabLocation from "./GrabLocation"
 
-function Homepage({ randomVideos, searchedVideos, getLocation}) {
+function Homepage({ randomVideos, searchedVideos, getLocation, input}) {
   const point = useLocation()
   GrabLocation(getLocation, point)
 
@@ -35,6 +35,8 @@ function Homepage({ randomVideos, searchedVideos, getLocation}) {
 
   return searchedVideos.length !== 0 ? (
     <div className="home">
+      <h2>Search results for: {input}</h2>
+      <hr />
       <ul className="displayed-vids">{searchedResults}</ul>
     </div>
   ) : (

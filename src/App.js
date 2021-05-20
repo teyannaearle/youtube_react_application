@@ -5,25 +5,27 @@ import { Route, Switch } from "react-router-dom"
 import HomePage from "./Components/HomePage"
 import About from "./Components/About"
 import YoutubeApi from './Components/YoutubeApi'
+import Videos from "./Components/Videos"
 
 
 export class App extends Component {
   constructor() {
     super()
     this.state = {
-      randomVideos: []
+      randomVideos: [], 
+      videoId: "SB-qEYVdvXA", 
     }
   }
 
   async componentDidMount() {
     const randVideos = await YoutubeApi.getRandom()
-    console.log(randVideos)
+    //console.log(randVideos)
     this.setState({
       randomVideos: randVideos,
     })
   }
   render() {
-    const { randomVideos } = this.state;
+    const { randomVideos, videoId } = this.state;
     return (
       <div>
         <Navbar />
@@ -32,6 +34,7 @@ export class App extends Component {
           // component={HomePage} randomVideos={randomVideos}
           ></Route>
           <Route path="/about" component={About}></Route>
+          <Route path="/videos/:id" render={(props) => <Videos {...props} videoId={videoId}/>}></Route>
         </Switch>
       </div>
     )

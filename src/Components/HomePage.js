@@ -23,6 +23,7 @@ function Homepage({ randomVideos }) {
       <h1>Recommended</h1>
       <hr />
       <div className="displayed-vids">{videos}</div>
+      
     </div>
   );
 }

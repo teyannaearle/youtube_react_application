@@ -100,6 +100,7 @@ export default class Videos extends Component {
         autoplay: 1,
       },
     };
+
     return (
       <>
         {invalid ? (
@@ -107,8 +108,8 @@ export default class Videos extends Component {
         ) : null}
         <div className="video-page">
           <h1 className="h1">{title}</h1>
-          <div>
-            <YouTube videoId={id} opts={opts} onReady={this._onReady} />
+          <div className="video">
+            <YouTube videoId={id} opts={opts} onReady={this._onReady} className='video-player'/>
           </div>
 
           <div className="comments">

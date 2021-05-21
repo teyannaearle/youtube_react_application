@@ -7,6 +7,10 @@
   background: rgb(252, 249, 249);
 }
 
+.video{
+  text-align: center;
+}
+
 .comments {
   width: 100%;
   display: flex;
@@ -42,4 +46,32 @@
   margin: 0 0 20px 0;
   padding: 20px;
   border-bottom: 1px solid darkgray;
+}
+
+@media screen and (max-width: 700px){
+  .video{
+    width: 80%;
+  }
+
+  .video-player{
+    width: 100%;
+    max-height: 290px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .comment-form {
+    display: flex;
+    flex-direction: column;    
+  }
+
+  .comment-form input {
+    margin-bottom: 5px;
+  }
+
+  .video-player{
+    width: 100%;
+    max-height: 200px;
+  }
+
 }

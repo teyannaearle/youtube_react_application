@@ -30,6 +30,22 @@
 .about p {
   text-align: justify;
 }
+
+.colabNames{
+  text-align: center;
+}
+
+.collaborators{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Project{
+display: flex;
+flex-direction: column;
+}
+
 @media screen and (max-width: 600px) {
   .about {
     display: flex;

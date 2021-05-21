@@ -47,7 +47,23 @@
 .delete-button button {
   background-color: rgb(14, 3, 3);
   color: white;
+  height: 20px;
 }
+button > img {
+  width: 20px;
+  height: 20px;
+}
+
+.like-button {
+  display: flex;
+  justify-content: center;
+}
+.like-button button {
+  width: 33px;
+}
+
+
+
 /* 
 .comment-user {
     display: flex;

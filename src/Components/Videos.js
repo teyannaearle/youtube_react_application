@@ -9,22 +9,27 @@ export default class Videos extends Component {
     super();
     this.state = {
       comments: {},
+      countLike: 0, 
+      countDislike: 0, 
       title: ""
     };
   }
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const commentData = {
-      commentName: e.target[0].value.trim(),
-      commentBody: e.target[1].value.trim(),
-    };
-    const timeStamp = new Date().getTime();
-    const comments = this.state.comments;
-    comments["comment-id" + timeStamp] = commentData;
-    this.setState({
-      comments: this.state.comments,
-    });
+    if (e.target[0].value.trim() && e.target[1].value.trim()) {
+      const commentData = {
+        commentName: e.target[0].value.trim(),
+        commentBody: e.target[1].value.trim(),
+      };
+      const timeStamp = new Date().getTime();
+      const comments = this.state.comments;
+      comments["comment-id" + timeStamp] = commentData;
+      this.setState({
+        comments: this.state.comments,
+      });
+    }
+
     e.target.reset();
   };
 
@@ -36,6 +41,20 @@ export default class Videos extends Component {
     });
   };
 
+  handleCountLike = (num) => {
+    console.log("count like")
+    this.setState({
+      countLike: this.state.countLike + num,
+    })
+  }
+
+  handleCountDislike = (num) => {
+    console.log("count dislike")
+    this.setState({
+      countDislike: this.state.countDislike + num
+    })
+  }
+
   renderComment = (key) => {
     return (
       <li key={key}>
@@ -44,6 +63,10 @@ export default class Videos extends Component {
           index={key}
           comment={this.state.comments[key]}
           deleteComment={this.deleteComment}
+          handleCountLike={this.handleCountLike}
+          handleCountDislike={this.handleCountDislike}
+          countLike={this.state.countLike}
+          countDislike={this.state.countDislike}
         />
       </li>
     );
@@ -65,6 +88,8 @@ export default class Videos extends Component {
   render() {
     const { author, text, comments, title} = this.state;
     const { invalid } = this.props;
+    // const { author, text, comments } = this.state;
+    // const { videoTitle, invalid } = this.props;
     const { id } = this.props.match.params;
     const postedComments = Object.keys(comments).map(this.renderComment);
 
@@ -77,7 +102,9 @@ export default class Videos extends Component {
     };
     return (
       <>
-        {invalid ? <h3 className="error">Invalid search. Please try again.</h3> : null }
+        {invalid ? (
+          <h3 className="error">Invalid search. Please try again.</h3>
+        ) : null}
         <div className="video-page">
           <h1 className="h1">{title}</h1>
           <div>
@@ -86,7 +113,11 @@ export default class Videos extends Component {
 
           <div className="comments">
             <h3>Leave a Comment</h3>
-            <form action="" onSubmit={this.handleSubmit} className="comment-form">
+            <form
+              action=""
+              onSubmit={this.handleSubmit}
+              className="comment-form"
+            >
               <label htmlFor="username">Name: </label>
               <input
                 type="text"
@@ -118,6 +149,6 @@ export default class Videos extends Component {
   _onReady(event) {
     //console.log(event)
     // access to player in all event handlers via event.target
-   // event.target.pauseVideo();
+    // event.target.pauseVideo();
   }
 }

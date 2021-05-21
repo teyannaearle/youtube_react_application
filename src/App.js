@@ -7,6 +7,7 @@ import About from "./Components/About";
 import YoutubeApi from "./Components/YoutubeApi";
 import Searchbar from "./Components/Searchbar";
 import Videos from "./Components/Videos";
+import VideoFirebase from "./Components/VideoFirebase"
 
 export class App extends Component {
   constructor() {
@@ -142,7 +143,7 @@ export class App extends Component {
           <Route
             path="/video/:id"
             render={(props) => (
-              <Videos
+              <VideoFirebase
                 {...props}    
                 videoTitle={videoTitle}
                 invalid={invalid}

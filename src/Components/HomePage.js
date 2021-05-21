@@ -1,18 +1,14 @@
 import React from "react";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./HomePage.css";
-import GrabLocation from "./GrabLocation";
 
 function Homepage({
   randomVideos,
   searchedVideos,
-  getLocation,
   input,
   grabVideo,
   invalid,
 }) {
-  const point = useLocation();
-  GrabLocation(getLocation, point);
 
   const listItems = (video, id) => {
     return (
@@ -21,7 +17,7 @@ function Homepage({
           <img
             src={video.snippet.thumbnails.medium.url}
             alt={video.snippet.title}
-            onClick={() => grabVideo(id, video.snippet.title)}
+            onClick={() => grabVideo()}
           />
           <br />
           <p className="title">{video.snippet.title}</p>

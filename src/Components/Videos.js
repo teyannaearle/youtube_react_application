@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import YouTube from "react-youtube";
 import PostedComment from "./PostedComment";
+import YoutubeApi from "./YoutubeApi"
 import "./Videos.css";
 
 export default class Videos extends Component {
@@ -8,6 +9,7 @@ export default class Videos extends Component {
     super();
     this.state = {
       comments: {},
+      title: ""
     };
   }
 
@@ -47,9 +49,22 @@ export default class Videos extends Component {
     );
   };
 
+  async componentDidMount(){
+    this.sendLocation()
+    const results = await YoutubeApi.getVideo(this.props.match.params.id)
+    const title = results[0].snippet.title
+    this.setState({
+      title 
+    })
+  }
+
+  sendLocation = () => {
+    this.props.getLocation(this.props.match.params.id)
+  }
+
   render() {
-    const { author, text, comments} = this.state;
-    const { videoTitle, invalid } = this.props;
+    const { author, text, comments, title} = this.state;
+    const { invalid } = this.props;
     const { id } = this.props.match.params;
     const postedComments = Object.keys(comments).map(this.renderComment);
 
@@ -64,7 +79,7 @@ export default class Videos extends Component {
       <>
         {invalid ? <h3 className="error">Invalid search. Please try again.</h3> : null }
         <div className="video-page">
-          <h1 className="h1">{videoTitle}</h1>
+          <h1 className="h1">{title}</h1>
           <div>
             <YouTube videoId={id} opts={opts} onReady={this._onReady} />
           </div>

@@ -22,9 +22,17 @@ const getSearch = async (input) => {
   return data.items;
 };
 
+const getVideo = async (id) => {
+  const { data } = await axios.get(
+    `https://youtube.googleapis.com/youtube/v3/videos?part=snippet&id=${id}&key=${apiKey}`
+  )
+  return data.items
+}
+
 const defaults = {
   getRandom,
   getSearch,
+  getVideo
 };
 
 export default defaults;

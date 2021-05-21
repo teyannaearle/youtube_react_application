@@ -14,10 +14,8 @@ export class App extends Component {
     super();
     this.state = {
       input: "",
-      videoId: "",
-      videoTitle: "",
-      location: "",
       prevInput: "",
+      videoId: "",
       redirect: false,
       randomVideos: [],
       searchedVideos: [],
@@ -41,16 +39,13 @@ export class App extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { input, location } = this.state;
+    const { input, videoId} = this.state;
+    const pathname = window.location.pathname
 
-    if ( (location === "/about" && !input) || (location === "/video/:id" && !input) ) {
+    if ((pathname === "/about" && input) || (pathname === `/video/${videoId}` && input)){
       this.setState({
-        invalid: true,
-      });
-    } else if (location === "/about") {
-      this.setState({
-        redirect: true,
-      });
+        redirect: true
+      })
     }
 
     if (input) {
@@ -77,17 +72,15 @@ export class App extends Component {
     });
   };
 
-  getLocation = (location) => {
+  getLocation  = (location) => {
     this.setState({
-      location: location,
-    });
-  };
+      videoId: location
+    })
+  }
 
-  grabVideo = (id, title) => {
+  grabVideo = () => {
     this.setState({
-      videoId: id,
-      videoTitle: title,
-      invalid: false
+      invalid: false,
     });
   };
 
@@ -99,7 +92,6 @@ export class App extends Component {
       searchedVideos,
       location,
       redirect,
-      videoTitle,
       invalid,
     } = this.state;
     return (
@@ -121,12 +113,10 @@ export class App extends Component {
                 input={prevInput}
                 randomVideos={randomVideos}
                 searchedVideos={searchedVideos}
-                getLocation={this.getLocation}
                 grabVideo={this.grabVideo}
                 invalid={invalid}
               />
             )}
-            // component={HomePage} randomVideos={randomVideos}
           ></Route>
           <Route
             path="/about"
@@ -134,7 +124,6 @@ export class App extends Component {
               <About
                 {...props}
                 location={location}
-                getLocation={this.getLocation}
                 invalid={invalid}
               />
             )}
@@ -145,8 +134,8 @@ export class App extends Component {
             render={(props) => (
               <VideoFirebase
                 {...props}    
-                videoTitle={videoTitle}
                 invalid={invalid}
+                getLocation={this.getLocation}
               />
             )}
           ></Route>

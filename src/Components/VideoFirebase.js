@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import YouTube from "react-youtube";
-import PostedComment from "./PostedComment";
 import "./Videos.css";
 import firebase from "./firebase.js";
+import person from "../Assets/person-icon-1682.png";
+import Like from "../Assets/youtube-like-png-39121.png";
+import Dislike from "../Assets/youtube-dislike-png-45967.png";
+import "./PostedComment.css";
 
 export default class VideoFirebase extends Component {
   constructor() {
     super();
     this.state = {
-      //   comments: {},
-      //   countLike: 0,
-      //   countDislike: 0,
+      countLike: 0,
+      countDislike: 0,
       username: "",
       comment: "",
       postedComments: [],
@@ -37,7 +39,7 @@ export default class VideoFirebase extends Component {
       comment: "",
       username: "",
     });
-    e.target.reset()
+    e.target.reset();
   }
   componentDidMount() {
     const commentsRef = firebase.database().ref("comments");
@@ -62,67 +64,46 @@ export default class VideoFirebase extends Component {
     commentRef.remove();
   }
 
+  handleCountLike = (num) => {
+    console.log("count like");
+    this.setState({
+      countLike: this.state.countLike + num,
+    });
+  };
 
-
-  //   handleSubmit = (e) => {
-  //     e.preventDefault();
-  //     if (e.target[0].value.trim() && e.target[1].value.trim()) {
-  //       const commentData = {
-  //         commentName: e.target[0].value.trim(),
-  //         commentBody: e.target[1].value.trim(),
-  //       };
-  //       const timeStamp = new Date().getTime();
-  //       const comments = this.state.comments;
-  //       comments["comment-id" + timeStamp] = commentData;
-  //       this.setState({
-  //         comments: this.state.comments,
-  //       });
-  //     }
-
-  //     e.target.reset();
-  //   };
-
-  //   deleteComment = (index) => {
-  //     const comments = this.state.comments;
-  //     delete comments[index];
-  //     this.setState({
-  //       comments,
-  //     });
-  //   };
-
-  //   handleCountLike = (num) => {
-  //     console.log("count like")
-  //     this.setState({
-  //       countLike: this.state.countLike + num,
-  //     })
-  //   }
-
-  //   handleCountDislike = (num) => {
-  //     console.log("count dislike")
-  //     this.setState({
-  //       countDislike: this.state.countDislike + num
-  //     })
-  //   }
-
-  //   renderComment = (key) => {
-  //     return (
-  //       <li key={key}>
-  //         <PostedComment
-  //           key={key}
-  //           index={key}
-  //           comment={this.state.comments[key]}
-  //           deleteComment={this.deleteComment}
-  //           handleCountLike={this.handleCountLike}
-  //           handleCountDislike={this.handleCountDislike}
-  //           countLike={this.state.countLike}
-  //           countDislike={this.state.countDislike}
-  //         />
-  //       </li>
-  //     );
-  //   };
+  handleCountDislike = (num) => {
+    console.log("count dislike");
+    this.setState({
+      countDislike: this.state.countDislike + num,
+    });
+  };
 
   render() {
-    const { author, text, comments } = this.state;
+    const getTime = () => {
+      const month = [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+        "Oct",
+        "Nov",
+        "Dec",
+      ];
+      const d = new Date();
+      const mon = month[d.getMonth()];
+      const day = d.getDate();
+      const year = d.getFullYear();
+      const dateAll = mon + " " + day + ", " + year;
+      return dateAll;
+    };
+
+    const { author, text, postedComments, countDislike, countLike } =
+      this.state;
     const { videoTitle, invalid } = this.props;
     const { id } = this.props.match.params;
     // const postedComments = Object.keys(comments).map(this.renderComment);
@@ -179,12 +160,50 @@ export default class VideoFirebase extends Component {
             <section className="comment-list">
               <div className="wrapper">
                 <ul>
-                  {this.state.postedComments.map((comment) => {
+                  {postedComments.map((comment) => {
                     return (
                       <li key={comment.id}>
-                        <h3>{comment.commentBody}</h3>
-                        <p>posted by: {comment.username}</p>
-                        <button onClick={() => this.removeComment(comment.id)}>Remove Comment</button>
+                        <div className="comment-user">
+                          <div className="comment-user-avatar">
+                            <img
+                              src={person}
+                              className="comment-avatar"
+                              alt="user avatar"
+                            />
+                          </div>
+                          <div className="comment-text">
+                            <span className="comment-username">
+                              {comment.username}
+                            </span>
+                            <p>{comment.commentBody}</p>
+                          </div>
+                          <time className="block-comment-time">
+                            {getTime()}
+                          </time>
+                          <span className="delete-button">
+                            {" "}
+                            <button
+                              onClick={() => this.removeComment(comment.id)}
+                            >
+                              Delete
+                            </button>
+
+                            
+                          </span>
+
+                          <span className="like-button">
+                            <button onClick={() => this.handleCountLike(1)}>
+                              <img src={Like} alt="like" />
+                            </button>
+                            {"     "}
+                            <p>{countLike ? countLike : null}</p>
+                            <button onClick={() => this.handleCountDislike(1)}>
+                              <img src={Dislike} alt="dislike" />
+                            </button>
+                            {"     "}
+                            <p>{countDislike ? countDislike : null}</p>
+                          </span>
+                        </div>
                       </li>
                     );
                   })}

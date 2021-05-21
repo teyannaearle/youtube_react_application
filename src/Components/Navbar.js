@@ -8,7 +8,7 @@ function Navbar(props) {
   return (
     <nav>
       <Link to="/">
-        <img src={Logo} alt="home" />
+        <img src={Logo} alt="home" onClick={props.clearSearch} />
       </Link>
       <Link to="/about">
         <img src={About} alt="about"  onClick={props.clearSearch} />

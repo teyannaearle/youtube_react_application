@@ -1,5 +1,6 @@
 import React from "react";
 import person from "../Assets/person-icon-1682.png";
+import "./PostedComment.css";
 
 const getTime = () => {
   const month = [
@@ -25,8 +26,6 @@ const getTime = () => {
 };
 
 export default function PostedComment({ index, key, comment, deleteComment }) {
-  console.log(comment);
-
   return (
     <div className="comment-user">
       <div className="comment-user-avatar">
@@ -34,19 +33,19 @@ export default function PostedComment({ index, key, comment, deleteComment }) {
           src={person}
           className="comment-avatar"
           alt="user avatar"
-          // style={{ height: "50px", width: "50px" }}
         />
       </div>
 
-      <span className="comment-username">{comment.commentName}</span>
-      <br />
-      <time className="block-comment-time">{getTime()}</time>
-
       <div className="comment-text">
+        <span className="comment-username">{comment.commentName}</span>
         <p>{comment.commentBody}</p>
-       
       </div>
-      <button onClick={() => deleteComment(index)}> Delete Comment</button>
+      <time className="block-comment-time">{getTime()}</time>
+      <br />
+      <span className="delete-button">
+        {" "}
+        <button onClick={() => deleteComment(index)}> Delete Comment</button>
+      </span>
     </div>
   );
 }

@@ -5,7 +5,7 @@ import firebase from "./firebase.js";
 import person from "../Assets/person-icon-1682.png";
 import Like from "../Assets/youtube-like-png-39121.png";
 import Dislike from "../Assets/youtube-dislike-png-45967.png";
-import "./PostedComment.css";
+import YoutubeApi from "./YoutubeApi";
 
 export default class VideoFirebase extends Component {
   constructor() {
@@ -16,6 +16,7 @@ export default class VideoFirebase extends Component {
       username: "",
       comment: "",
       postedComments: [],
+      title: "",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -41,7 +42,8 @@ export default class VideoFirebase extends Component {
     });
     e.target.reset();
   }
-  componentDidMount() {
+  async componentDidMount() {
+    this.sendLocation();
     const commentsRef = firebase.database().ref("comments");
     commentsRef.on("value", (snapshot) => {
       let comments = snapshot.val();
@@ -56,6 +58,12 @@ export default class VideoFirebase extends Component {
       this.setState({
         postedComments: newState,
       });
+    });
+
+    const results = await YoutubeApi.getVideo(this.props.match.params.id);
+    const title = results[0].snippet.title;
+    this.setState({
+      title,
     });
   }
 
@@ -76,6 +84,10 @@ export default class VideoFirebase extends Component {
     this.setState({
       countDislike: this.state.countDislike + num,
     });
+  };
+
+  sendLocation = () => {
+    this.props.getLocation(this.props.match.params.id);
   };
 
   render() {
@@ -102,9 +114,9 @@ export default class VideoFirebase extends Component {
       return dateAll;
     };
 
-    const { author, text, postedComments, countDislike, countLike } =
+    const { author, text, postedComments, countDislike, countLike, title } =
       this.state;
-    const { videoTitle, invalid } = this.props;
+    const { invalid } = this.props;
     const { id } = this.props.match.params;
     // const postedComments = Object.keys(comments).map(this.renderComment);
 
@@ -121,9 +133,14 @@ export default class VideoFirebase extends Component {
           <h3 className="error">Invalid search. Please try again.</h3>
         ) : null}
         <div className="video-page">
-          <h1 className="h1">{videoTitle}</h1>
-          <div>
-            <YouTube videoId={id} opts={opts} onReady={this._onReady} />
+          <h1 className="h1">{title}</h1>
+          <div className="video">
+            <YouTube
+              videoId={id}
+              opts={opts}
+              onReady={this._onReady}
+              className="video-player"
+            />
           </div>
 
           <div className="comments">
@@ -162,7 +179,7 @@ export default class VideoFirebase extends Component {
                 <ul>
                   {postedComments.map((comment) => {
                     return (
-                      <li key={comment.id}>
+                      <li key={comment.id} className="comment">
                         <div className="comment-user">
                           <div className="comment-user-avatar">
                             <img
@@ -187,8 +204,6 @@ export default class VideoFirebase extends Component {
                             >
                               Delete
                             </button>
-
-                            
                           </span>
 
                           <span className="like-button">

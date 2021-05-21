@@ -1,5 +1,7 @@
 import React from "react";
 import person from "../Assets/person-icon-1682.png";
+import Like from "../Assets/youtube-like-png-39121.png";
+import Dislike from "../Assets/youtube-dislike-png-45967.png";
 import "./PostedComment.css";
 
 const getTime = () => {
@@ -25,15 +27,19 @@ const getTime = () => {
   return dateAll;
 };
 
-export default function PostedComment({ index, comment, deleteComment }) {
+export default function PostedComment({
+  index,
+  comment,
+  deleteComment,
+  handleCountLike,
+  handleCountDislike,
+  countLike,
+  countDislike,
+}) {
   return (
     <div className="comment-user">
       <div className="comment-user-avatar">
-        <img
-          src={person}
-          className="comment-avatar"
-          alt="user avatar"
-        />
+        <img src={person} className="comment-avatar" alt="user avatar" />
       </div>
 
       <div className="comment-text">
@@ -46,6 +52,20 @@ export default function PostedComment({ index, comment, deleteComment }) {
         {" "}
         <button onClick={() => deleteComment(index)}> Delete Comment</button>
       </span>
+      <span className="like-button">
+        <button onClick={() => handleCountLike(1)}>
+          <img src={Like} alt="like" />
+        </button>{"     "}
+        <p>{countLike ? countLike : null}</p>
+        <button onClick={() => handleCountDislike(1)}>
+          <img src={Dislike} alt="dislike" />
+        </button>{"     "}
+        <p>{countDislike ? countDislike : null}</p>
+      </span>
+      
+        
+       
+    
     </div>
   );
 }

@@ -101,8 +101,8 @@ export default class Videos extends Component {
     );
   }
   _onReady(event) {
-    console.log(event)
+    //console.log(event)
     // access to player in all event handlers via event.target
-    event.target.pauseVideo();
+   // event.target.pauseVideo();
   }
 }

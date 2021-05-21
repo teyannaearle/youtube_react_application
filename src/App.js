@@ -98,7 +98,6 @@ export class App extends Component {
       searchedVideos,
       location,
       redirect,
-      videoId,
       videoTitle,
       invalid,
     } = this.state;
@@ -144,8 +143,7 @@ export class App extends Component {
             path="/video/:id"
             render={(props) => (
               <Videos
-                {...props}
-               
+                {...props}    
                 videoTitle={videoTitle}
                 invalid={invalid}
               />

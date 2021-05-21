@@ -25,7 +25,7 @@ const getTime = () => {
   return dateAll;
 };
 
-export default function PostedComment({ index, key, comment, deleteComment }) {
+export default function PostedComment({ index, comment, deleteComment }) {
   return (
     <div className="comment-user">
       <div className="comment-user-avatar">

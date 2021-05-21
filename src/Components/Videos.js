@@ -26,14 +26,6 @@ export default class Videos extends Component {
     e.target.reset();
   };
 
-  handleName = (e) => {
-    // this.userName = e.target.value,
-  };
-
-  handleComment = (e) => {
-    //this.text = e.target.value,
-  };
-
   deleteComment = (index) => {
     const comments = this.state.comments;
     delete comments[index];
@@ -57,7 +49,7 @@ export default class Videos extends Component {
 
   render() {
     const { author, text, comments } = this.state;
-    const { videoId } = this.props;
+    const { id } = this.props.match.params;
     const postedComments = Object.keys(comments).map(this.renderComment);
 
     const opts = {
@@ -70,7 +62,7 @@ export default class Videos extends Component {
     return (
       <div>
         <div>
-          <YouTube videoId={videoId} opts={opts} onReady={this._onReady} />
+          <YouTube videoId={id} opts={opts} onReady={this._onReady} />
         </div>
 
         <div className="comments">
@@ -82,7 +74,6 @@ export default class Videos extends Component {
               name="username"
               id="username"
               value={author}
-              onChange={this.handleName}
               placeholder="Your Name"
             />
 
@@ -92,7 +83,6 @@ export default class Videos extends Component {
               name="comment"
               id="comment"
               value={text}
-              onChange={this.handleComment}
               placeholder="Add your comment here"
             />
             <input type="submit" value="Submit" />
@@ -103,6 +93,7 @@ export default class Videos extends Component {
     );
   }
   _onReady(event) {
+    console.log(event)
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }

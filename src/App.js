@@ -120,7 +120,8 @@ export class App extends Component {
 
           <Route
             path="/video/:id"
-            render={(props) => <Videos {...props} videoId={videoId} />}
+            render={(props) => <Videos {...props} />}
+            
           ></Route>
         </Switch>
       </div>

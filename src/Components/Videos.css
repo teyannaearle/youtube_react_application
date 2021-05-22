@@ -30,9 +30,30 @@
   text-align: center;
 }
 
+.comment-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.submit-comment{
+  width: 150px;
+  background-color: rgb(14, 3, 3);
+  color: white;
+  margin: 5px;
+}
+
 .comment-form input {
   margin-left: 5px;
   margin-right: 5px;
+}
+
+.input-field{
+  width:400px;
+  height: 20px;
+  margin-bottom: 5px;
+  resize: none;
 }
 
 .comment-list {
@@ -79,11 +100,15 @@
   align-items: flex-start;
   text-align: left;
   margin-left: 15px;
+  margin-bottom: 5px;
+  flex-wrap: wrap;
+  word-break: break-word;
 }
+
+
 
 .block-comment-time {
   font-size: 14px;
-  /* font-weight: 700; */
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
   font-size: 14px;
 }
@@ -160,5 +185,17 @@ button > img {
   }
   .comment-text {
     align-items: center;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .input-field{
+    width:250px
+  }
+}
+
+@media screen and (max-width: 500px){
+  .input-field{
+    width:100%
   }
 }

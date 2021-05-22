@@ -40,6 +40,7 @@ export default class VideoFirebase extends Component {
     });
     e.target.reset();
   }
+
   async componentDidMount() {
     this.sendLocation();
     const commentsRef = firebase.database().ref("comments");
@@ -58,11 +59,17 @@ export default class VideoFirebase extends Component {
       });
     });
 
-    const results = await YoutubeApi.getVideo(this.props.match.params.id);
-    const title = results[0].snippet.title;
-    this.setState({
-      title,
-    });
+    try {
+      const results = await YoutubeApi.getVideo(this.props.match.params.id);
+      const title = results[0].snippet.title;
+      this.setState({
+        title,
+      });
+    } catch {
+      this.setState({
+        title: "",
+      });
+    }
   }
 
   removeComment(commentId) {
@@ -146,26 +153,29 @@ export default class VideoFirebase extends Component {
               onSubmit={this.handleSubmit}
               className="comment-form"
             >
-              <label htmlFor="username">Name: </label>
-              <input
+              <span className="form-field"> 
+              <textarea
                 type="text"
                 name="username"
                 id="username"
                 value={author}
                 onChange={this.handleChange}
                 placeholder="Your Name"
+                className="input-field"
               />
-
-              <label htmlFor="comment">Comment: </label>
-              <input
+              </span>
+              <span className="form-field">
+              <textarea
                 type="text"
                 name="comment"
                 id="comment"
                 value={text}
                 onChange={this.handleChange}
                 placeholder="Add your comment here"
+                className="input-field"
               />
-              <input type="submit" value="Submit" />
+              </span>
+              <input type="submit" value="Submit" className="submit-comment"/>
             </form>
 
             <section className="comment-list">

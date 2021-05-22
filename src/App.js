@@ -6,8 +6,7 @@ import HomePage from "./Components/HomePage";
 import About from "./Components/About";
 import YoutubeApi from "./Components/YoutubeApi";
 import Searchbar from "./Components/Searchbar";
-import Videos from "./Components/Videos";
-import VideoFirebase from "./Components/VideoFirebase"
+import VideoFirebase from "./Components/VideoFirebase";
 
 export class App extends Component {
   constructor() {
@@ -19,15 +18,23 @@ export class App extends Component {
       redirect: false,
       randomVideos: [],
       searchedVideos: [],
+      apiError: false,
       invalid: false,
     };
   }
 
   async componentDidMount() {
-    const randVideos = await YoutubeApi.getRandom();
-    this.setState({
-      randomVideos: randVideos,
-    });
+    try {
+      const randVideos = await YoutubeApi.getRandom();
+      this.setState({
+        randomVideos: randVideos,
+        apiError: false,
+      });
+    } catch {
+      this.setState({
+        apiError: true,
+      });
+    }
   }
 
   handleInput = (e) => {
@@ -39,24 +46,34 @@ export class App extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    const { input, videoId} = this.state;
-    const pathname = window.location.pathname
+    const { input, videoId } = this.state;
+    const pathname = window.location.pathname;
 
-    if ((pathname === "/about" && input) || (pathname === `/video/${videoId}` && input)){
+    if (
+      (pathname === "/about" && input) ||
+      (pathname === `/video/${videoId}` && input)
+    ) {
       this.setState({
-        redirect: true
-      })
+        redirect: true,
+      });
     }
 
     if (input) {
-      const searchResults = await YoutubeApi.getSearch(input);
-      this.setState({
-        prevInput: input,
-        searchedVideos: searchResults,
-        input: "",
-        redirect: false,
-        invalid: false,
-      });
+      try {
+        const searchResults = await YoutubeApi.getSearch(input);
+        this.setState({
+          prevInput: input,
+          searchedVideos: searchResults,
+          input: "",
+          redirect: false,
+          invalid: false,
+          apiError: false,
+        });
+      } catch {
+        this.setState({
+          apiError: true,
+        });
+      }
     } else {
       this.setState({
         invalid: true,
@@ -72,11 +89,11 @@ export class App extends Component {
     });
   };
 
-  getLocation  = (location) => {
+  getLocation = (location) => {
     this.setState({
-      videoId: location
-    })
-  }
+      videoId: location,
+    });
+  };
 
   grabVideo = () => {
     this.setState({
@@ -93,6 +110,7 @@ export class App extends Component {
       location,
       redirect,
       invalid,
+      apiError,
     } = this.state;
     return (
       <div>
@@ -115,17 +133,14 @@ export class App extends Component {
                 searchedVideos={searchedVideos}
                 grabVideo={this.grabVideo}
                 invalid={invalid}
+                apiError={apiError}
               />
             )}
           ></Route>
           <Route
             path="/about"
             render={(props) => (
-              <About
-                {...props}
-                location={location}
-                invalid={invalid}
-              />
+              <About {...props} location={location} invalid={invalid} />
             )}
           ></Route>
 
@@ -133,7 +148,7 @@ export class App extends Component {
             path="/video/:id"
             render={(props) => (
               <VideoFirebase
-                {...props}    
+                {...props}
                 invalid={invalid}
                 getLocation={this.getLocation}
               />

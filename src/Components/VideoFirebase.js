@@ -15,6 +15,7 @@ export default class VideoFirebase extends Component {
       comment: "",
       postedComments: [],
       title: "",
+      invalidInput: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -23,24 +24,32 @@ export default class VideoFirebase extends Component {
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value,
+      invalidInput: false,
     });
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    const commentsRef = firebase.database().ref("comments");
-    const comment = {
-      username: this.state.username,
-      commentBody: this.state.comment,
-      likes: 0,
-      dislikes: 0,
-    };
-    commentsRef.push(comment);
-    this.setState({
-      comment: "",
-      username: "",
-    });
-    e.target.reset();
+    if (this.state.username && this.state.comment) {
+      const commentsRef = firebase.database().ref("comments");
+      const comment = {
+        username: this.state.username,
+        commentBody: this.state.comment,
+        likes: 0,
+        dislikes: 0,
+      };
+      commentsRef.push(comment);
+      this.setState({
+        comment: "",
+        username: "",
+        invalidInput: false,
+      });
+      e.target.reset();
+    } else {
+      this.setState({
+        invalidInput: true,
+      });
+    }
   }
 
   async componentDidMount() {
@@ -124,7 +133,7 @@ export default class VideoFirebase extends Component {
   };
 
   render() {
-    const { author, text, postedComments, title } = this.state;
+    const { author, text, postedComments, title, invalidInput } = this.state;
     const { invalid } = this.props;
     const { id } = this.props.match.params;
 
@@ -159,7 +168,7 @@ export default class VideoFirebase extends Component {
               className="comment-form"
             >
               <span className="form-field">
-                <textarea
+                <input
                   type="text"
                   name="username"
                   id="username"
@@ -182,7 +191,11 @@ export default class VideoFirebase extends Component {
               </span>
               <input type="submit" value="Submit" className="submit-comment" />
             </form>
-
+            {invalidInput ? (
+              <h4 className="error">
+                Please enter both your name and a comment.
+              </h4>
+            ) : null}
             <section className="comment-list">
               <div className="wrapper">
                 <ul>

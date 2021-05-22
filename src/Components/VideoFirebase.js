@@ -32,6 +32,8 @@ export default class VideoFirebase extends Component {
     const comment = {
       username: this.state.username,
       commentBody: this.state.comment,
+      likes: 0,
+      dislikes: 0,
     };
     commentsRef.push(comment);
     this.setState({
@@ -52,6 +54,9 @@ export default class VideoFirebase extends Component {
           id: comment,
           username: comments[comment].username,
           commentBody: comments[comment].commentBody,
+          likes: comments[comment].likes,
+          dislikes: comments[comment].dislikes,
+          datePosted: this.getTime(),
         });
       }
       this.setState({
@@ -77,48 +82,48 @@ export default class VideoFirebase extends Component {
     commentRef.remove();
   }
 
-  handleCountLike = (num) => {
-    console.log("count like");
-    this.setState({
-      countLike: this.state.countLike + num,
-    });
+  handleCountLike = (id) => {
+    firebase
+      .database()
+      .ref(`/comments/${id}/likes`)
+      .set(firebase.database.ServerValue.increment(1));
   };
 
-  handleCountDislike = (num) => {
-    console.log("count dislike");
-    this.setState({
-      countDislike: this.state.countDislike + num,
-    });
+  handleCountDislike = (id) => {
+    firebase
+      .database()
+      .ref(`/comments/${id}/dislikes`)
+      .set(firebase.database.ServerValue.increment(1));
   };
 
   sendLocation = () => {
     this.props.getLocation(this.props.match.params.id);
   };
 
-  render() {
-    const getTime = () => {
-      const month = [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
-      ];
-      const d = new Date();
-      const mon = month[d.getMonth()];
-      const day = d.getDate();
-      const year = d.getFullYear();
-      const dateAll = mon + " " + day + ", " + year;
-      return dateAll;
-    };
+  getTime = () => {
+    const month = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
+    ];
+    const d = new Date();
+    const mon = month[d.getMonth()];
+    const day = d.getDate();
+    const year = d.getFullYear();
+    const dateAll = mon + " " + day + ", " + year;
+    return dateAll;
+  };
 
+  render() {
     const { author, text, postedComments, title } = this.state;
     const { invalid } = this.props;
     const { id } = this.props.match.params;
@@ -199,7 +204,7 @@ export default class VideoFirebase extends Component {
                             <p>{comment.commentBody}</p>
                           </div>
                           <time className="block-comment-time">
-                            {getTime()}
+                            {comment.datePosted}
                           </time>
                           <span className="delete-button">
                             {" "}
@@ -211,8 +216,18 @@ export default class VideoFirebase extends Component {
                           </span>
 
                           <span className="like-button">
-                            <LikeBtn />
-                            <DislikeBtn />
+                            <div
+                              onClick={() => this.handleCountLike(comment.id)}
+                            >
+                              <LikeBtn likes={comment.likes} />{" "}
+                            </div>
+                            <div
+                              onClick={() =>
+                                this.handleCountDislike(comment.id)
+                              }
+                            >
+                              <DislikeBtn dislikes={comment.dislikes} />{" "}
+                            </div>
                           </span>
                         </div>
                       </li>

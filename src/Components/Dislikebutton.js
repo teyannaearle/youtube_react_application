@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+// import React, { useState } from "react";
 import Dislike from "../Assets/youtube-dislike-png-45967.png";
 
-function DislikeBtn() {
-  const [dislikes, setDislikes] = useState(0);
+function DislikeBtn(props) {
+  // const [dislikes, setDislikes] = useState(0);
+  const { dislikes } = props;
 
   return (
-    <button onClick={() => setDislikes(dislikes + 1)}>
+    // onClick={() => setDislikes(dislikes + 1)}
+    <button>
       <img src={Dislike} alt="dislike" />
       <br />
-      {dislikes} dislikes
+      {dislikes} {dislikes === 1 ? "dislike" : "dislikes"}
     </button>
   );
 }

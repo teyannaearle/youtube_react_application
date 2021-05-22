@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+// import React, { useEffect, useState } from "react";
 import Like from "../Assets/youtube-like-png-39121.png";
 
-function LikeBtn() {
-  const [likes, setLikes] = useState(0);
+function LikeBtn(props) {
+  // const [likes, setLikes] = useState(0);
+  const { likes } = props;
 
   return (
-    <button onClick={() => setLikes(likes + 1)}>
+    // onClick={() => setLikes(likes + 1)}
+    <button>
       <img src={Like} alt="like" />
       <br />
-      {likes} likes
+      {likes} {likes === 1 ? "like" : "likes"}
     </button>
   );
 }

@@ -6,7 +6,6 @@ import HomePage from "./Components/HomePage";
 import About from "./Components/About";
 import YoutubeApi from "./Components/YoutubeApi";
 import Searchbar from "./Components/Searchbar";
-import Videos from "./Components/Videos";
 import VideoFirebase from "./Components/VideoFirebase"
 
 export class App extends Component {

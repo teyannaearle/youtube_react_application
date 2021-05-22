@@ -3,11 +3,6 @@ import YouTube from "react-youtube";
 import "./Videos.css";
 import firebase from "./firebase.js";
 import person from "../Assets/person-icon-1682.png";
-<<<<<<< HEAD
-// import Like from "../Assets/youtube-like-png-39121.png";
-// import Dislike from "../Assets/youtube-dislike-png-45967.png";
-=======
->>>>>>> fa0d24364159af55d4e4a69454c50be1ca703cfd
 import YoutubeApi from "./YoutubeApi";
 import LikeBtn from "./Likebutton";
 import DislikeBtn from "./Dislikebutton";
@@ -16,11 +11,6 @@ export default class VideoFirebase extends Component {
   constructor() {
     super();
     this.state = {
-<<<<<<< HEAD
-      // countLike: 0,
-      // countDislike: 0,
-=======
->>>>>>> fa0d24364159af55d4e4a69454c50be1ca703cfd
       username: "",
       comment: "",
       postedComments: [],
@@ -122,12 +112,7 @@ export default class VideoFirebase extends Component {
       return dateAll;
     };
 
-<<<<<<< HEAD
-    const { author, text, postedComments, title } =
-      this.state;
-=======
     const { author, text, postedComments, title } = this.state;
->>>>>>> fa0d24364159af55d4e4a69454c50be1ca703cfd
     const { invalid } = this.props;
     const { id } = this.props.match.params;
 

@@ -80,7 +80,11 @@
   text-align: left;
   margin-left: 15px;
   margin-bottom: 5px;
+  flex-wrap: wrap;
+  word-break: break-word;
 }
+
+
 
 .block-comment-time {
   font-size: 14px;

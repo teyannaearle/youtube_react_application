@@ -8,6 +8,7 @@ function Homepage({
   input,
   grabVideo,
   invalid,
+  apiError
 }) {
 
   const listItems = (video, id) => {
@@ -37,7 +38,7 @@ function Homepage({
     return listItems(video, id);
   });
 
-  return searchedVideos.length !== 0 ? (
+  const homePage = searchedVideos.length !== 0 ? (
     <>
       {invalid ? (<h3 className="error">Invalid search. Please try again.</h3>) : null}
       <div className="home">
@@ -56,6 +57,8 @@ function Homepage({
       </div>
     </>
   );
+
+  return apiError ? <h1 className="error">Looks like we've hit a snag. Refresh or come back later.</h1> : homePage
 }
 
 export default Homepage;

@@ -26,8 +26,6 @@ export default class VideoFirebase extends Component {
     });
   }
 
-
-
   handleSubmit(e) {
     e.preventDefault();
     const commentsRef = firebase.database().ref("comments");
@@ -42,7 +40,7 @@ export default class VideoFirebase extends Component {
     });
     e.target.reset();
   }
-  
+
   async componentDidMount() {
     this.sendLocation();
     const commentsRef = firebase.database().ref("comments");
@@ -61,12 +59,17 @@ export default class VideoFirebase extends Component {
       });
     });
 
-
-    const results = await YoutubeApi.getVideo(this.props.match.params.id);
-    const title = results[0].snippet.title;
-    this.setState({
-      title,
-    });
+    try {
+      const results = await YoutubeApi.getVideo(this.props.match.params.id);
+      const title = results[0].snippet.title;
+      this.setState({
+        title,
+      });
+    } catch {
+      this.setState({
+        title: "",
+      });
+    }
   }
 
   removeComment(commentId) {

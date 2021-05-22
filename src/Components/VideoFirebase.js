@@ -3,18 +3,24 @@ import YouTube from "react-youtube";
 import "./Videos.css";
 import firebase from "./firebase.js";
 import person from "../Assets/person-icon-1682.png";
+<<<<<<< HEAD
 // import Like from "../Assets/youtube-like-png-39121.png";
 // import Dislike from "../Assets/youtube-dislike-png-45967.png";
+=======
+>>>>>>> fa0d24364159af55d4e4a69454c50be1ca703cfd
 import YoutubeApi from "./YoutubeApi";
-import LikeBtn from "./Likebutton"
-import DislikeBtn from "./Dislikebutton"
+import LikeBtn from "./Likebutton";
+import DislikeBtn from "./Dislikebutton";
 
 export default class VideoFirebase extends Component {
   constructor() {
     super();
     this.state = {
+<<<<<<< HEAD
       // countLike: 0,
       // countDislike: 0,
+=======
+>>>>>>> fa0d24364159af55d4e4a69454c50be1ca703cfd
       username: "",
       comment: "",
       postedComments: [],
@@ -116,11 +122,14 @@ export default class VideoFirebase extends Component {
       return dateAll;
     };
 
+<<<<<<< HEAD
     const { author, text, postedComments, title } =
       this.state;
+=======
+    const { author, text, postedComments, title } = this.state;
+>>>>>>> fa0d24364159af55d4e4a69454c50be1ca703cfd
     const { invalid } = this.props;
     const { id } = this.props.match.params;
-    // const postedComments = Object.keys(comments).map(this.renderComment);
 
     const opts = {
       height: "390",
@@ -174,8 +183,6 @@ export default class VideoFirebase extends Component {
               <input type="submit" value="Submit" />
             </form>
 
-            {/* <div className="comment-list">{postedComments}</div> */}
-
             <section className="comment-list">
               <div className="wrapper">
                 <ul>
@@ -211,16 +218,6 @@ export default class VideoFirebase extends Component {
                           <span className="like-button">
                             <LikeBtn />
                             <DislikeBtn />
-                            {/* <button onClick={() => this.handleCountLike(1)}>
-                              <img src={Like} alt="like" />
-                            </button>
-                            {"     "}
-                            <p>{countLike ? countLike : null}</p>
-                            <button onClick={() => this.handleCountDislike(1)}>
-                              <img src={Dislike} alt="dislike" />
-                            </button>
-                            {"     "}
-                            <p>{countDislike ? countDislike : null}</p> */}
                           </span>
                         </div>
                       </li>

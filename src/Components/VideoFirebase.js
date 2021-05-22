@@ -6,6 +6,8 @@ import person from "../Assets/person-icon-1682.png";
 import Like from "../Assets/youtube-like-png-39121.png";
 import Dislike from "../Assets/youtube-dislike-png-45967.png";
 import YoutubeApi from "./YoutubeApi";
+import LikeBtn from "./Likebutton"
+import DislikeBtn from "./Dislikebutton"
 
 export default class VideoFirebase extends Component {
   constructor() {
@@ -207,7 +209,9 @@ export default class VideoFirebase extends Component {
                           </span>
 
                           <span className="like-button">
-                            <button onClick={() => this.handleCountLike(1)}>
+                            <LikeBtn />
+                            <DislikeBtn />
+                            {/* <button onClick={() => this.handleCountLike(1)}>
                               <img src={Like} alt="like" />
                             </button>
                             {"     "}
@@ -216,7 +220,7 @@ export default class VideoFirebase extends Component {
                               <img src={Dislike} alt="dislike" />
                             </button>
                             {"     "}
-                            <p>{countDislike ? countDislike : null}</p>
+                            <p>{countDislike ? countDislike : null}</p> */}
                           </span>
                         </div>
                       </li>

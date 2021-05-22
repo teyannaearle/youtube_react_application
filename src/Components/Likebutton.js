@@ -10,7 +10,7 @@ function LikeBtn(props) {
     <button>
       <img src={Like} alt="like" />
       <br />
-      {likes} {likes === 1 ? "like" : "likes"}
+      {likes} {likes === 1 ? "like ❤️" : "likes ❤️" }
     </button>
   );
 }

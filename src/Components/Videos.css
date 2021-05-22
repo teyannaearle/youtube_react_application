@@ -129,7 +129,8 @@ button > img {
   justify-content: center;
 }
 .like-button button {
-  width: 75px;
+  width: 95px;
+  margin: 5px
 }
 
 .comment-username {

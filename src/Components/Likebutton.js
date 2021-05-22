@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Like from "../Assets/youtube-like-png-39121.png";
-import Dislike from "../Assets/youtube-dislike-png-45967.png";
+
 
 function LikeBtn() {
   const [likes, setLikes] = useState(0);

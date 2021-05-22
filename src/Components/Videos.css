@@ -34,10 +34,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
-.submit-comment{
+.submit-comment {
   width: 150px;
   background-color: rgb(14, 3, 3);
   color: white;
@@ -49,8 +48,8 @@
   margin-right: 5px;
 }
 
-.input-field{
-  width:400px;
+.input-field {
+  width: 400px;
   height: 20px;
   margin-bottom: 5px;
   resize: none;
@@ -105,8 +104,6 @@
   word-break: break-word;
 }
 
-
-
 .block-comment-time {
   font-size: 14px;
   font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
@@ -153,13 +150,12 @@ button > img {
 }
 
 @media screen and (max-width: 580px) {
-
-  .block-comment-time{
+  .block-comment-time {
     margin-top: 5px;
     margin-bottom: 5px;
   }
 
-  .delete-button{
+  .delete-button {
     margin-bottom: 5px;
   }
   .comment-form {
@@ -188,14 +184,14 @@ button > img {
   }
 }
 
-@media screen and (max-width: 500px){
-  .input-field{
-    width:250px
+@media screen and (max-width: 500px) {
+  .input-field {
+    width: 250px;
   }
 }
 
-@media screen and (max-width: 500px){
-  .input-field{
-    width:100%
+@media screen and (max-width: 500px) {
+  .input-field {
+    width: 100%;
   }
 }

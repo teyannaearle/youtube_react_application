@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // URL for searching videos
-// https://www.googleapis.com/youtube/v3/search?key=${apiKey}&type=video&part=snippet&maxResults=20&q=cats
+// https://www.googleapis.com/youtube/v3/search?key=${apiKey}&type=video&part=snippet&maxResults=20&q=${searchInput}
 
 // URL for popular/random videos
 // https://www.googleapis.com/youtube/v3/videos?chart=mostPopular&key=${apiKey}&part=snippet&maxResults=10

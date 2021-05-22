@@ -8,9 +8,8 @@ function Homepage({
   input,
   grabVideo,
   invalid,
-  apiError
+  apiError,
 }) {
-
   const listItems = (video, id) => {
     return (
       <li key={id}>
@@ -38,27 +37,38 @@ function Homepage({
     return listItems(video, id);
   });
 
-  const homePage = searchedVideos.length !== 0 ? (
-    <>
-      {invalid ? (<h3 className="error">Invalid search. Please try again.</h3>) : null}
-      <div className="home">
-        <h2>Search results for: {input}</h2>
-        <hr />
-        <ul className="displayed-vids">{searchedResults}</ul>
-      </div>
-    </>
-  ) : (
-    <>
-      {invalid ? (<h3 className="error">Invalid search. Please try again.</h3>) : null}
-      <div className="home">
-        <h1>Recommended</h1>
-        <hr />
-        <ul className="displayed-vids">{randVids}</ul>
-      </div>
-    </>
-  );
+  const homePage =
+    searchedVideos.length !== 0 ? (
+      <>
+        {invalid ? (
+          <h3 className="error">Invalid search. Please try again.</h3>
+        ) : null}
+        <div className="home">
+          <h2>Search results for: {input}</h2>
+          <hr />
+          <ul className="displayed-vids">{searchedResults}</ul>
+        </div>
+      </>
+    ) : (
+      <>
+        {invalid ? (
+          <h3 className="error">Invalid search. Please try again.</h3>
+        ) : null}
+        <div className="home">
+          <h1>Recommended</h1>
+          <hr />
+          <ul className="displayed-vids">{randVids}</ul>
+        </div>
+      </>
+    );
 
-  return apiError ? <h1 className="error">Looks like we've hit a snag. Refresh or come back later.</h1> : homePage
+  return apiError ? (
+    <h1 className="error">
+      Looks like we've hit a snag. Refresh or come back later.
+    </h1>
+  ) : (
+    homePage
+  );
 }
 
 export default Homepage;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import YouTube from "react-youtube";
 import PostedComment from "./PostedComment";
-import YoutubeApi from "./YoutubeApi"
+import YoutubeApi from "./YoutubeApi";
 import "./Videos.css";
 
 export default class Videos extends Component {
@@ -9,9 +9,9 @@ export default class Videos extends Component {
     super();
     this.state = {
       comments: {},
-      countLike: 0, 
-      countDislike: 0, 
-      title: ""
+      countLike: 0,
+      countDislike: 0,
+      title: "",
     };
   }
 
@@ -42,18 +42,18 @@ export default class Videos extends Component {
   };
 
   handleCountLike = (num) => {
-    console.log("count like")
+    console.log("count like");
     this.setState({
       countLike: this.state.countLike + num,
-    })
-  }
+    });
+  };
 
   handleCountDislike = (num) => {
-    console.log("count dislike")
+    console.log("count dislike");
     this.setState({
-      countDislike: this.state.countDislike + num
-    })
-  }
+      countDislike: this.state.countDislike + num,
+    });
+  };
 
   renderComment = (key) => {
     return (
@@ -72,24 +72,22 @@ export default class Videos extends Component {
     );
   };
 
-  async componentDidMount(){
-    this.sendLocation()
-    const results = await YoutubeApi.getVideo(this.props.match.params.id)
-    const title = results[0].snippet.title
+  async componentDidMount() {
+    this.sendLocation();
+    const results = await YoutubeApi.getVideo(this.props.match.params.id);
+    const title = results[0].snippet.title;
     this.setState({
-      title 
-    })
+      title,
+    });
   }
 
   sendLocation = () => {
-    this.props.getLocation(this.props.match.params.id)
-  }
+    this.props.getLocation(this.props.match.params.id);
+  };
 
   render() {
-    const { author, text, comments, title} = this.state;
+    const { author, text, comments, title } = this.state;
     const { invalid } = this.props;
-    // const { author, text, comments } = this.state;
-    // const { videoTitle, invalid } = this.props;
     const { id } = this.props.match.params;
     const postedComments = Object.keys(comments).map(this.renderComment);
 
@@ -109,7 +107,12 @@ export default class Videos extends Component {
         <div className="video-page">
           <h1 className="h1">{title}</h1>
           <div className="video">
-            <YouTube videoId={id} opts={opts} onReady={this._onReady} className='video-player'/>
+            <YouTube
+              videoId={id}
+              opts={opts}
+              onReady={this._onReady}
+              className="video-player"
+            />
           </div>
 
           <div className="comments">

@@ -153,29 +153,29 @@ export default class VideoFirebase extends Component {
               onSubmit={this.handleSubmit}
               className="comment-form"
             >
-              <span className="form-field"> 
-              <textarea
-                type="text"
-                name="username"
-                id="username"
-                value={author}
-                onChange={this.handleChange}
-                placeholder="Your Name"
-                className="input-field"
-              />
+              <span className="form-field">
+                <textarea
+                  type="text"
+                  name="username"
+                  id="username"
+                  value={author}
+                  onChange={this.handleChange}
+                  placeholder="Your Name"
+                  className="input-field"
+                />
               </span>
               <span className="form-field">
-              <textarea
-                type="text"
-                name="comment"
-                id="comment"
-                value={text}
-                onChange={this.handleChange}
-                placeholder="Add your comment here"
-                className="input-field"
-              />
+                <textarea
+                  type="text"
+                  name="comment"
+                  id="comment"
+                  value={text}
+                  onChange={this.handleChange}
+                  placeholder="Add your comment here"
+                  className="input-field"
+                />
               </span>
-              <input type="submit" value="Submit" className="submit-comment"/>
+              <input type="submit" value="Submit" className="submit-comment" />
             </form>
 
             <section className="comment-list">

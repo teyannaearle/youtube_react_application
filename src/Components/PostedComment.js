@@ -2,7 +2,7 @@ import React from "react";
 import person from "../Assets/person-icon-1682.png";
 import Like from "../Assets/youtube-like-png-39121.png";
 import Dislike from "../Assets/youtube-dislike-png-45967.png";
-// import "./PostedComment.css";
+import "./PostedComment.css";
 
 const getTime = () => {
   const month = [
@@ -55,17 +55,15 @@ export default function PostedComment({
       <span className="like-button">
         <button onClick={() => handleCountLike(1)}>
           <img src={Like} alt="like" />
-        </button>{"     "}
+        </button>
+        {"     "}
         <p>{countLike ? countLike : null}</p>
         <button onClick={() => handleCountDislike(1)}>
           <img src={Dislike} alt="dislike" />
-        </button>{"     "}
+        </button>
+        {"     "}
         <p>{countDislike ? countDislike : null}</p>
       </span>
-      
-        
-       
-    
     </div>
   );
 }

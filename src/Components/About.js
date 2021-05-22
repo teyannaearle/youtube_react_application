@@ -111,7 +111,7 @@ function About(props) {
           is to help whomever I can, in this way, because I care about my
           wellness, your wellness and everyone else's wellness too!
         </p>
-        <span className="collaborators">
+        <span className="collaborators tey">
           <p>
             <strong>Teyanna Earle</strong>
             <a href="https://github.com/teyannaearle">

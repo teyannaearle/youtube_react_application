@@ -37,18 +37,18 @@ export default class VideoFirebase extends Component {
         commentBody: this.state.comment,
         likes: 0,
         dislikes: 0,
-        datePosted: this.getTime(),
+        datePosted: this.getTime()
       };
       commentsRef.push(comment);
       this.setState({
         comment: "",
         username: "",
-        invalidInput: false,
+        invalidInput: false
       });
       e.target.reset();
     } else {
       this.setState({
-        invalidInput: true,
+        invalidInput: true
       });
     }
   }
@@ -78,11 +78,11 @@ export default class VideoFirebase extends Component {
       const results = await YoutubeApi.getVideo(this.props.match.params.id);
       const title = results[0].snippet.title;
       this.setState({
-        title,
+        title
       });
     } catch {
       this.setState({
-        title: "",
+        title: ""
       });
     }
   }
@@ -142,7 +142,7 @@ export default class VideoFirebase extends Component {
       height: "390",
       width: "640",
       playerVars: {
-        autoplay: 1,
+        autoplay: 1
       },
     };
     return (

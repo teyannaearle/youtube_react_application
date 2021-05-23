@@ -37,6 +37,7 @@ export default class VideoFirebase extends Component {
         commentBody: this.state.comment,
         likes: 0,
         dislikes: 0,
+        datePosted: this.getTime(),
       };
       commentsRef.push(comment);
       this.setState({
@@ -65,7 +66,7 @@ export default class VideoFirebase extends Component {
           commentBody: comments[comment].commentBody,
           likes: comments[comment].likes,
           dislikes: comments[comment].dislikes,
-          datePosted: this.getTime(),
+          datePosted: comments[comment].datePosted
         });
       }
       this.setState({

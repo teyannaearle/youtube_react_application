@@ -6,6 +6,8 @@ import person from "../Assets/person-icon-1682.png";
 import YoutubeApi from "./YoutubeApi";
 import LikeBtn from "./Likebutton";
 import DislikeBtn from "./Dislikebutton";
+import UpdateBtn from "./Updatebutton";
+import { AvatarGenerator } from "random-avatar-generator";
 
 export default class VideoFirebase extends Component {
   constructor() {
@@ -37,6 +39,8 @@ export default class VideoFirebase extends Component {
         commentBody: this.state.comment,
         likes: 0,
         dislikes: 0,
+        datePosted: this.getTime(),
+        avatar: this.generateRandomAvatar(),
       };
       commentsRef.push(comment);
       this.setState({
@@ -65,7 +69,8 @@ export default class VideoFirebase extends Component {
           commentBody: comments[comment].commentBody,
           likes: comments[comment].likes,
           dislikes: comments[comment].dislikes,
-          datePosted: this.getTime(),
+          datePosted: comments[comment].datePosted,
+          avatar: comments[comment].avatar,
         });
       }
       this.setState({
@@ -109,6 +114,15 @@ export default class VideoFirebase extends Component {
     this.props.getLocation(this.props.match.params.id);
   };
 
+ 
+
+  handleUpdate = (commentId) => {
+    const commentRef = firebase.database().ref(`/comments/${commentId}`);
+    commentRef.update({
+      commentBody: this.state.comment,
+    });
+  };
+
   getTime = () => {
     const month = [
       "Jan",
@@ -132,8 +146,14 @@ export default class VideoFirebase extends Component {
     return dateAll;
   };
 
+  generateRandomAvatar = () => {
+    const generator = new AvatarGenerator();
+    return generator.generateRandomAvatar();
+  };
+
   render() {
-    const { author, text, postedComments, title, invalidInput } = this.state;
+    const { author, text, postedComments, title, invalidInput } =
+      this.state;
     const { invalid } = this.props;
     const { id } = this.props.match.params;
 
@@ -205,7 +225,7 @@ export default class VideoFirebase extends Component {
                         <div className="comment-user">
                           <div className="comment-user-avatar">
                             <img
-                              src={person}
+                              src={comment.avatar}
                               className="comment-avatar"
                               alt="user avatar"
                             />
@@ -226,6 +246,14 @@ export default class VideoFirebase extends Component {
                             >
                               Delete
                             </button>
+                          </span>
+                          <span className="update">
+                            <UpdateBtn
+                              handleUpdate={this.handleUpdate}
+                              handleChange={this.handleChange}
+                              text={text}
+                              commentId={comment.id}
+                            />
                           </span>
 
                           <span className="like-button">
@@ -257,6 +285,6 @@ export default class VideoFirebase extends Component {
   _onReady(event) {
     //console.log(event)
     // access to player in all event handlers via event.target
-    // event.target.pauseVideo();
+    event.target.pauseVideo();
   }
 }

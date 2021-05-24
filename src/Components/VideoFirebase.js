@@ -162,8 +162,9 @@ export default class VideoFirebase extends Component {
       width: "640",
       playerVars: {
         autoplay: 1, 
-        origin: 'http://localhost:3000'
+        origin: 'https://localhost:3000',
       },
+     
     };
     return (
       <>
@@ -287,5 +288,12 @@ export default class VideoFirebase extends Component {
     //console.log(event)
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
-  }
+
+  //   const embedCode = event.target.getVideoEmbedCode();
+  //   console.log(embedCode)
+  // //event.target.playVideo();
+  // if (document.getElementById('embed-code')) {
+  //   document.getElementById('embed-code').innerHTML = embedCode;
+ // }
+}
 }

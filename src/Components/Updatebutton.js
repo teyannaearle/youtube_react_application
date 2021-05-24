@@ -3,11 +3,11 @@ import React, { useState} from "react";
 
 export default function UpdateBtn(props) {
     const [editable, updateEditable] = useState(false)
-  const {} = props;
+  const { commentId, text, handleChange } = props;
   
   function submitUpdate(e) {
     e.preventDefault()
-    props.handleUpdate(props.commentId)
+    props.handleUpdate(commentId)
     updateEditable(!editable)
 }
   return (
@@ -27,8 +27,8 @@ export default function UpdateBtn(props) {
             id="comment"
             name="comment"
             placeholder="Update your comment here"
-            onChange={props.handleChange}
-            value={props.text}
+            onChange={handleChange}
+            value={text}
             className="input-field"
           />{" "}
           <button>Submit</button>{" "}

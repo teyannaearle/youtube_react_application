@@ -1,9 +1,9 @@
 import React, { useState} from "react";
+import "./Videos.css"
 
 
 export default function UpdateBtn(props) {
     const [editable, updateEditable] = useState(false)
-  const {} = props;
   
   function submitUpdate(e) {
     e.preventDefault()
@@ -11,7 +11,7 @@ export default function UpdateBtn(props) {
     updateEditable(!editable)
 }
   return (
-    <div>
+    <div className="update-buttons">
       <button
         onClick={() => {
          updateEditable(!editable);

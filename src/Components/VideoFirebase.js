@@ -8,6 +8,7 @@ import LikeBtn from "./Likebutton";
 import DislikeBtn from "./Dislikebutton";
 import UpdateBtn from "./Updatebutton";
 import { AvatarGenerator } from "random-avatar-generator";
+import uuid from "react-uuid";
 
 export default class VideoFirebase extends Component {
   constructor() {
@@ -18,6 +19,9 @@ export default class VideoFirebase extends Component {
       postedComments: [],
       title: "",
       invalidInput: false,
+      avatars: [],
+      avatar: "",
+      showAvatars: false,
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -40,18 +44,20 @@ export default class VideoFirebase extends Component {
         likes: 0,
         dislikes: 0,
         datePosted: this.getTime(),
-        avatar: this.generateRandomAvatar(),
+        avatar: this.state.avatar ? this.state.avatar : person,
+        showAvatars: false,
       };
       commentsRef.push(comment);
       this.setState({
         comment: "",
         username: "",
-        invalidInput: false
+        invalidInput: false,
+        avatar: "",
       });
       e.target.reset();
     } else {
       this.setState({
-        invalidInput: true
+        invalidInput: true,
       });
     }
   }
@@ -76,17 +82,18 @@ export default class VideoFirebase extends Component {
       this.setState({
         postedComments: newState,
       });
+      this.generateRandomAvatar();
     });
 
     try {
       const results = await YoutubeApi.getVideo(this.props.match.params.id);
       const title = results[0].snippet.title;
       this.setState({
-        title
+        title,
       });
     } catch {
       this.setState({
-        title: ""
+        title: "",
       });
     }
   }
@@ -113,8 +120,6 @@ export default class VideoFirebase extends Component {
   sendLocation = () => {
     this.props.getLocation(this.props.match.params.id);
   };
-
- 
 
   handleUpdate = (commentId) => {
     const commentRef = firebase.database().ref(`/comments/${commentId}`);
@@ -148,12 +153,41 @@ export default class VideoFirebase extends Component {
 
   generateRandomAvatar = () => {
     const generator = new AvatarGenerator();
-    return generator.generateRandomAvatar();
+    const avatarArray = [];
+
+    for (let i = 0; i < 12; i++) {
+      avatarArray.push(generator.generateRandomAvatar());
+    }
+    this.setState({
+      avatars: avatarArray,
+    });
+  };
+
+  selectAvatar = (av) => {
+    this.setState({
+      avatar: av,
+      showAvatars: false,
+    });
+  };
+
+  showAvatarMenu = (e) => {
+    e.preventDefault();
+    this.setState({
+      showAvatars: !this.state.showAvatars,
+    });
   };
 
   render() {
-    const { author, text, postedComments, title, invalidInput } =
-      this.state;
+    const {
+      author,
+      text,
+      postedComments,
+      title,
+      invalidInput,
+      avatars,
+      avatar,
+      showAvatars,
+    } = this.state;
     const { invalid } = this.props;
     const { id } = this.props.match.params;
 
@@ -161,9 +195,20 @@ export default class VideoFirebase extends Component {
       height: "390",
       width: "640",
       playerVars: {
-        autoplay: 1
+        autoplay: 1,
       },
     };
+
+    const dropDown = avatars.map((av) => (
+      <img
+        value={avatar}
+        onClick={() => this.selectAvatar(av)}
+        src={av}
+        alt={avatar}
+        key={uuid()}
+        className="avatar-images"
+      />
+    ));
     return (
       <>
         {invalid ? (
@@ -209,7 +254,25 @@ export default class VideoFirebase extends Component {
                   className="input-field"
                 />
               </span>
-              <input type="submit" value="Submit" className="submit-comment" />
+              <span className="form-buttons">
+                <span>
+                  {avatar ? (
+                    <img src={avatar} className="chosen-avatar" />
+                  ) : null}
+                  <button className="dropbtn" onClick={this.showAvatarMenu}>
+                    Choose Your Avatar (Optional)
+                  </button>
+                </span>
+                {showAvatars ? (
+                  <div className="avatar-menu">{dropDown}</div>
+                ) : null}
+
+                <input
+                  type="submit"
+                  value="Submit"
+                  className="submit-comment"
+                />
+              </span>
             </form>
             {invalidInput ? (
               <h4 className="error">
@@ -285,6 +348,6 @@ export default class VideoFirebase extends Component {
   _onReady(event) {
     //console.log(event)
     // access to player in all event handlers via event.target
-    event.target.pauseVideo();
+    // event.target.pauseVideo();
   }
 }

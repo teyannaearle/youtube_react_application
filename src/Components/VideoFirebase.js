@@ -196,7 +196,8 @@ export default class VideoFirebase extends Component {
       width: "640",
       playerVars: {
         autoplay: 1, 
-        origin: 'https://localhost:3000',
+        // origin: 'https://localhost:3000',
+      
       },
      
     };
@@ -259,7 +260,7 @@ export default class VideoFirebase extends Component {
               <span className="form-buttons">
                 <span>
                   {avatar ? (
-                    <img src={avatar} className="chosen-avatar" />
+                    <img src={avatar} className="chosen-avatar" alt={"avatar"} />
                   ) : null}
                   <button className="dropbtn" onClick={this.showAvatarMenu}>
                     Choose Your Avatar (Optional)

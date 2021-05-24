@@ -195,8 +195,10 @@ export default class VideoFirebase extends Component {
       height: "390",
       width: "640",
       playerVars: {
-        autoplay: 1,
+        autoplay: 1, 
+        origin: 'https://localhost:3000',
       },
+     
     };
 
     const dropDown = avatars.map((av) => (
@@ -349,5 +351,12 @@ export default class VideoFirebase extends Component {
     //console.log(event)
     // access to player in all event handlers via event.target
     // event.target.pauseVideo();
-  }
+
+  //   const embedCode = event.target.getVideoEmbedCode();
+  //   console.log(embedCode)
+  // //event.target.playVideo();
+  // if (document.getElementById('embed-code')) {
+  //   document.getElementById('embed-code').innerHTML = embedCode;
+ // }
+}
 }

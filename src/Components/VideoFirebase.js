@@ -4,11 +4,10 @@ import "./Videos.css";
 import firebase from "./firebase.js";
 import person from "../Assets/person-icon-1682.png";
 import YoutubeApi from "./YoutubeApi";
-import LikeBtn from "./Likebutton";
-import DislikeBtn from "./Dislikebutton";
-import UpdateBtn from "./Updatebutton";
 import { AvatarGenerator } from "random-avatar-generator";
 import uuid from "react-uuid";
+import CommentForm from "./CommentForm.js";
+import CommentList from "./CommentList.js";
 
 export default class VideoFirebase extends Component {
   constructor() {
@@ -96,7 +95,6 @@ export default class VideoFirebase extends Component {
         title: "",
       });
     }
-
   }
 
   removeComment(commentId) {
@@ -178,8 +176,6 @@ export default class VideoFirebase extends Component {
     });
   };
 
-
-
   render() {
     const {
       author,
@@ -194,21 +190,13 @@ export default class VideoFirebase extends Component {
     const { invalid } = this.props;
     const { id } = this.props.match.params;
 
- 
     const opts = {
       height: "390",
-      width: "640",     
+      width: "640",
       playerVars: {
-        autoplay: 1, 
-          // origin: 'https://www.youtube.com',
-          // origin: 'https://localhost:3000',
-          // origin: window.location.hostname     
-          origin: `https://*`      
+        autoplay: 1,
       },
-   
     };
-
-
 
     const dropDown = avatars.map((av) => (
       <img
@@ -221,11 +209,11 @@ export default class VideoFirebase extends Component {
       />
     ));
     return (
-
       <>
         {invalid ? (
           <h3 className="error">Invalid search. Please try again.</h3>
         ) : null}
+
         <div className="video-page">
           <h1 className="h1">{title}</h1>
           <div className="video">
@@ -239,124 +227,30 @@ export default class VideoFirebase extends Component {
 
           <div className="comments">
             <h3>Leave a Comment</h3>
-            <form
-              action=""
-              onSubmit={this.handleSubmit}
-              className="comment-form"
-            >
-              <span className="form-field">
-                <input
-                  type="text"
-                  name="username"
-                  id="username"
-                  value={author}
-                  onChange={this.handleChange}
-                  placeholder="Your Name"
-                  className="input-field"
-                />
-              </span>
-              <span className="form-field">
-                <textarea
-                  type="text"
-                  name="comment"
-                  id="comment"
-                  value={text}
-                  onChange={this.handleChange}
-                  placeholder="Add your comment here"
-                  className="input-field"
-                />
-              </span>
-              <span className="form-buttons">
-                <span>
-                  {avatar ? (
-                    <img src={avatar} className="chosen-avatar" alt={"avatar"} />
-                  ) : null}
-                  <button className="dropbtn" onClick={this.showAvatarMenu}>
-                    Choose Your Avatar (Optional)
-                  </button>
-                </span>
-                {showAvatars ? (
-                  <div className="avatar-menu">{dropDown}</div>
-                ) : null}
-
-                <input
-                  type="submit"
-                  value="Submit"
-                  className="submit-comment"
-                />
-              </span>
-            </form>
-            {invalidInput ? (
-              <h4 className="error">
-                Please enter both your name and a comment.
-              </h4>
-            ) : null}
-            <section className="comment-list">
-              <div className="wrapper">
-                <ul>
-                  {postedComments.map((comment) => {
-                    return (
-                      <li key={comment.id} className="comment">
-                        <div className="comment-user">
-                          <div className="comment-user-avatar">
-                            <img
-                              src={comment.avatar}
-                              className="comment-avatar"
-                              alt="user avatar"
-                            />
-                          </div>
-                          <div className="comment-text">
-                            <span className="comment-username">
-                              {comment.username}
-                            </span>
-                            <p>{comment.commentBody}</p>
-                          </div>
-                          <time className="block-comment-time">
-                            {comment.datePosted}
-                          </time>
-                          <span className="delete-button">
-                            {" "}
-                            <button
-                              onClick={() => this.removeComment(comment.id)}
-                            >
-                              Delete
-                            </button>
-                          </span>
-                          <span className="update">
-                            <UpdateBtn
-                              handleUpdate={this.handleUpdate}
-                              handleChange={this.handleChange}
-                              text={text}
-                              commentId={comment.id}
-                            />
-                          </span>
-
-                          <span className="like-button">
-                            <div
-                              onClick={() => this.handleCountLike(comment.id)}
-                            >
-                              <LikeBtn likes={comment.likes} />{" "}
-                            </div>
-                            <div
-                              onClick={() =>
-                                this.handleCountDislike(comment.id)
-                              }
-                            >
-                              <DislikeBtn dislikes={comment.dislikes} />{" "}
-                            </div>
-                          </span>
-                        </div>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </section>
+            <CommentForm
+              handleSubmit={this.handleSubmit}
+              handleChange={this.handleChange}
+              avatar={avatar}
+              author={author}
+              showAvatarMenu={this.showAvatarMenu}
+              dropDown={dropDown}
+              invalidInput={invalidInput}
+              text={text}
+              showAvatars={showAvatars}
+            />
+            <CommentList
+              handleUpdate={this.handleUpdate}
+              handleChange={this.handleChange}
+              text={text}
+              removeComment={this.removeComment}
+              handleCountDislike={this.handleCountDislike}
+              handleCountLike={this.handleCountLike}
+              postedComments={postedComments}
+            />
           </div>
         </div>
       </>
     );
   }
-  _onReady(event) {
-}
+  _onReady(event) {}
 }

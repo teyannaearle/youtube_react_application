@@ -7,10 +7,6 @@
   background: rgb(252, 249, 249);
 }
 
-.video {
-  text-align: center;
-}
-
 .comments {
   width: 100%;
   display: flex;
@@ -179,7 +175,7 @@ button > img {
   cursor: pointer;
 }
 
-@media screen and (max-width: 750px)  {
+@media screen and (max-width: 750px) {
   .comment {
     display: flex;
     flex-direction: column;
@@ -201,7 +197,6 @@ button > img {
     width: 100%;
     max-height: 290px;
   }
-
 }
 
 @media screen and (max-width: 580px) {
@@ -226,17 +221,6 @@ button > img {
     width: 100%;
     max-height: 200px;
   }
-
-  /* .comment {
-    display: flex;
-    flex-direction: column;
-  } */
-  /* .comment-user {
-    grid-template-columns: 1fr;
-  }
-  .comment-text {
-    align-items: center;
-  } */
 }
 
 @media screen and (max-width: 500px) {

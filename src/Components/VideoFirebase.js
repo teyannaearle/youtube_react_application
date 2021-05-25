@@ -193,13 +193,17 @@ export default class VideoFirebase extends Component {
 
     const opts = {
       height: "390",
-      width: "640",
+      width: "640",     
       playerVars: {
-        autoplay: 1, 
-        // origin: 'https://localhost:3000',
+        autoplay: 1,    playerVars: {
+          autoplay: 1, 
+          origin: 'https://localhost:3000',
+          // origin: window.location.hostname
+
+        }
+
       
-      },
-     
+      }
     };
 
     const dropDown = avatars.map((av) => (
@@ -225,6 +229,7 @@ export default class VideoFirebase extends Component {
               opts={opts}
               onReady={this._onReady}
               className="video-player"
+              origin= 'https://localhost:3000'
             />
           </div>
 

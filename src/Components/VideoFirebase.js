@@ -96,6 +96,7 @@ export default class VideoFirebase extends Component {
         title: "",
       });
     }
+
   }
 
   removeComment(commentId) {
@@ -177,6 +178,8 @@ export default class VideoFirebase extends Component {
     });
   };
 
+
+
   render() {
     const {
       author,
@@ -191,24 +194,25 @@ export default class VideoFirebase extends Component {
     const { invalid } = this.props;
     const { id } = this.props.match.params;
 
+ 
     const opts = {
       height: "390",
       width: "640",     
       playerVars: {
-        autoplay: 1,    playerVars: {
-          autoplay: 1, 
-          origin: 'https://localhost:3000',
-          // origin: window.location.hostname
-
-        }
-
-      
-      }
+        autoplay: 1, 
+          // origin: 'https://www.youtube.com',
+          // origin: 'https://localhost:3000',
+          // origin: window.location.hostname     
+          origin: `https://*`      
+      },
+   
     };
+
+
 
     const dropDown = avatars.map((av) => (
       <img
-        value={avatar}
+        value={av}
         onClick={() => this.selectAvatar(av)}
         src={av}
         alt={avatar}
@@ -217,6 +221,7 @@ export default class VideoFirebase extends Component {
       />
     ));
     return (
+
       <>
         {invalid ? (
           <h3 className="error">Invalid search. Please try again.</h3>
@@ -229,7 +234,6 @@ export default class VideoFirebase extends Component {
               opts={opts}
               onReady={this._onReady}
               className="video-player"
-              origin= 'https://localhost:3000'
             />
           </div>
 
@@ -354,15 +358,5 @@ export default class VideoFirebase extends Component {
     );
   }
   _onReady(event) {
-    //console.log(event)
-    // access to player in all event handlers via event.target
-    // event.target.pauseVideo();
-
-  //   const embedCode = event.target.getVideoEmbedCode();
-  //   console.log(embedCode)
-  // //event.target.playVideo();
-  // if (document.getElementById('embed-code')) {
-  //   document.getElementById('embed-code').innerHTML = embedCode;
- // }
 }
 }

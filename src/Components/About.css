@@ -33,9 +33,6 @@
   float: right;
   padding-left: 20px;
 }
-.about p {
-  text-align: justify;
-}
 
 .colabNames {
   text-align: center;
@@ -70,11 +67,14 @@ svg:hover {
   }
   .Angelina img {
     padding-right: 0px;
+    float: none;
   }
 
-  .about p {
-    text-align: justify;
+  .Teyanna img {
+    float:none;
+    padding-left: 0px;
   }
+
   .tey {
     order: -1;
     padding-left: 0px;

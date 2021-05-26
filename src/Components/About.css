@@ -72,6 +72,9 @@ svg:hover {
     padding-right: 0px;
   }
 
+  .about p {
+    text-align: justify;
+  }
   .tey {
     order: -1;
     padding-left: 0px;

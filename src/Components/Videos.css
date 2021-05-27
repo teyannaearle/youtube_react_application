@@ -176,6 +176,10 @@ button > img {
 }
 
 @media screen and (max-width: 750px) {
+  .comment-user {
+    padding: 0px;
+  }
+
   .comment {
     display: flex;
     flex-direction: column;

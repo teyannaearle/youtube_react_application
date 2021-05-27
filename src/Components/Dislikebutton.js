@@ -7,7 +7,7 @@ function DislikeBtn(props) {
     <button>
       <img src={Dislike} alt="dislike" />
       <br />
-      💔{dislikes} {dislikes === 1 ? "dislike " : "dislikes"}     
+      💔 {dislikes} {dislikes === 1 ? "dislike " : "dislikes"}     
     </button>
   );
 }

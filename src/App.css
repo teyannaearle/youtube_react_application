@@ -7,3 +7,9 @@
   text-align: center;
   color: red;
 }
+
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}

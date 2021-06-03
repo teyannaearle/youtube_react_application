@@ -1,5 +1,7 @@
 import Dislike from "../Assets/youtube-dislike-png-45967.png";
 
+// Again, should be DislikeButton.js
+
 function DislikeBtn(props) {
   const { dislikes } = props;
 

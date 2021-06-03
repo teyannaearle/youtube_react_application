@@ -8,9 +8,13 @@ function About(props) {
 
   return (
     <div className="about-page">
+
+      {/* Ternary statements are meant to be 'one liners,' in that they are meant to fit on one line of code. Also, if you look here at the React docs, https://reactjs.org/docs/conditional-rendering.html, specifically at the "Inline If with Logical && Operator" section, it explains how to 'short circuit' the Ternary and get rid of the 'else', or ': null', statement altogether. You may find that useful in the future! */}
+
       {invalid ? (
         <h3 className="error">Invalid search. Please try again.</h3>
       ) : null}
+
       <div className="about Project">
         <h2 className="projectTitle">YouTube?</h2>
         <p>(*Psst! It's not the original.)</p>
@@ -128,6 +132,7 @@ function About(props) {
             </a>
           </p>
           <img src={Teyanna} alt="Teyanna" />
+          {/* Alt tags are meant to be short, descriptive statements about the img they are associated with. This is key for vision-impared people who use screen readers. A better alt tag here may have been "A portrait photo of Teyanna Earle". */}
         </span>
       </div>
     </div>

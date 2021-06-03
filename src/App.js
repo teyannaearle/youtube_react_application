@@ -8,6 +8,14 @@ import YoutubeApi from "./Components/YoutubeApi";
 import Searchbar from "./Components/Searchbar";
 import VideoFirebase from "./Components/VideoFirebase";
 
+// This is just a general comment about component naming conventions in your file tree. Component file names should be PascalCased, just like the note in Likebutton.js. It should be LikeButton.js. Tiny fixes! 
+
+/* Your CSS files should not be housed in the components folder. I would say there are two ways to restructure your CSS files. 
+1. Either have separate folders for each component and CSS file, i.e. 'about' for About.js and About.css
+2. Have a separate 'css' folder and house all of your CSS files within. */
+
+// Another very tiny naming convention - folders, like 'Components', should be lowercased. React Components themselves are uppercased.
+
 export class App extends Component {
   constructor() {
     super();
